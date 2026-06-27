@@ -73,6 +73,10 @@ body {
   cursor: pointer;
 }
 
+.nav-links {
+  display: flex;
+}
+
 .nav-links a {
   color: var(--text-muted);
   text-decoration: none;
@@ -124,7 +128,7 @@ body {
   margin-bottom: 35px;
 }
 
-/* CAMBIO 7: Estilos del Contador FOMO con Eco Visual */
+/* Contador FOMO con Eco Visual */
 .fomo-counter {
   display: flex;
   align-items: center;
@@ -485,11 +489,75 @@ body {
   transform: translateY(-2px);
 }
 
-/* Responsive */
+/* CAMBIO 8: Media Queries específicas para optimización móvil (< 768px) */
 @media (max-width: 768px) {
-  .row-top { grid-template-columns: 1fr; }
-  .collection-card.central { width: 100%; }
-  .hero h1 { font-size: 36px; }
+  /* Cabecera / Navegación */
+  .main-header {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 20px;
+  }
+  
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .nav-links a {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 12px;
+  }
+
+  /* Sección Principal Hero (Fuentes reducidas proporcionalmente) */
+  .hero {
+    padding: 60px 15px;
+  }
+  
+  .hero h1 {
+    font-size: 32px;
+    letter-spacing: 2px;
+  }
+  
+  .hero p {
+    font-size: 14px;
+    margin-bottom: 25px;
+    padding: 0 10px;
+  }
+
+  /* Contingencias de Estructura de Bloques (Colecciones) */
+  .row-top {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .collection-card.central {
+    width: 100%;
+  }
+  
+  .collection-card {
+    height: 280px;
+  }
+
+  /* Cuadrículas de catálogos y productos */
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 10px;
+  }
+  
+  .section-title {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+
+  /* Adaptación de textos informativos en móvil */
+  .fomo-text {
+    font-size: 11px;
+    text-align: center;
+  }
 }
 </style>
 
@@ -610,7 +678,7 @@ body {
       <h2>Preguntas Frecuentes</h2>
       <div class="faq-item">
         <h3>¿Cuánto tardan los envíos y cuál es su coste?</h3>
-        <p>Para mantener la máxima exclusividad y ofrecerte precios ajustados sin sobreproducción, trabajamos bajo demanda directamente con nuestros centers de logística internacionales principales. El plazo de entrega total estimado ronda los 15-18 días laborables. ¡Te aseguramos que la espera merece totalmente la pena! Además, el envío es gratuito en pedidos superiores a 50€ (3.95€ para inferiores).</p>
+        <p>Para mantener la máxima exclusividad y ofrecerte precios ajustados sin sobreproducción, trabajamos bajo demanda directamente con nuestros centros de logística internacionales principales. El plazo de entrega total estimado ronda los 15-18 días laborables. ¡Te aseguramos que la espera merece totalmente la pena! Además, el envío es gratuito en pedidos superiores a 50€ (3.95€ para inferiores).</p>
       </div>
       <div class="faq-item">
         <h3>¿Qué métodos de pago aceptáis?</h3>
@@ -717,32 +785,26 @@ function handleContactForm(e) {
   e.target.reset();
 }
 
-// CAMBIO 7: Lógica del simulador dinámico del contador inteligente
 function startFomoCounter() {
   const counterElement = document.getElementById('active-users');
   if (!counterElement) return;
 
   function getRandomUsers() {
     const rand = Math.random();
-    // 75% de probabilidad para el rango creíble (40 a 90)
     if (rand < 0.75) {
       return Math.floor(Math.random() * (90 - 40 + 1)) + 40;
     } else {
-      // 25% de probabilidad para los extremos (0-39 o 91-100)
       return Math.random() < 0.5 
         ? Math.floor(Math.random() * 40) 
         : Math.floor(Math.random() * (100 - 91 + 1)) + 91;
     }
   }
 
-  // Número inicial real
   let currentUsers = getRandomUsers();
   counterElement.textContent = currentUsers;
 
-  // Fluctuación dinámica regulada cada 4.5 segundos
   setInterval(() => {
     const targetUsers = getRandomUsers();
-    // Suaviza el cambio simulando pequeños pasos de subida/bajada
     const difference = targetUsers - currentUsers;
     const step = difference > 0 ? Math.ceil(difference * 0.4) : Math.floor(difference * 0.4);
     currentUsers += step;
@@ -753,6 +815,6 @@ function startFomoCounter() {
 
 document.addEventListener("DOMContentLoaded", () => {
   injectProducts();
-  startFomoCounter(); // Inicializa el contador
+  startFomoCounter();
 });
 </script>
