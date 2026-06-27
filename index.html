@@ -1,271 +1,758 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaGen Supply</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
-        body { background-color: #0b0f19; color: #f3f4f6; display: flex; flex-direction: column; min-height: 100vh; }
-        
-        /* BARRA DE ANUNCIOS SUPERIOR */
-        .announcement-bar { background: #000000; border-bottom: 1px solid #1f2937; height: 35px; display: flex; align-items: center; overflow: hidden; position: relative; width: 100%; z-index: 101; }
-        .ticker-wrapper { display: flex; width: 100%; white-space: nowrap; }
-        .ticker-text { display: inline-block; padding-left: 100%; font-size: 11px; font-weight: bold; letter-spacing: 2px; color: #00f2fe; text-transform: uppercase; animation: ticker 30s linear infinite; }
-        
-        @keyframes ticker {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
-        }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        header { background: #111827; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 22px; font-weight: bold; letter-spacing: 3px; color: #00f2fe; cursor: pointer; }
-        nav a { margin: 0 15px; text-decoration: none; color: #9ca3af; font-weight: 500; transition: color 0.3s; cursor: pointer; }
-        nav a:hover { color: #00f2fe; }
-        
-        .hero { background: radial-gradient(circle, #1e1b4b 0%, #0b0f19 100%); padding: 120px 20px; text-align: center; border-bottom: 1px solid #1f2937; }
-        .hero h1 { font-size: 48px; margin-bottom: 20px; font-weight: 800; letter-spacing: 1px; }
-        .hero p { font-size: 18px; margin-bottom: 35px; color: #9ca3af; }
-        .btn-main { background: #00f2fe; color: #0b0f19; padding: 14px 35px; text-decoration: none; font-weight: bold; border-radius: 6px; box-shadow: 0 0 15px rgba(0, 242, 254, 0.4); transition: transform 0.2s; display: inline-block; border: none; cursor: pointer; }
-        .btn-main:hover { transform: scale(1.05); }
-        
-        .sections-container { padding: 60px 20px; max-width: 1200px; margin: 0 auto; text-align: center; width: 100%; }
-        h2.section-title { margin-bottom: 40px; font-size: 32px; letter-spacing: 1px; text-transform: uppercase; }
-        
-        /* DISEÑO DE COLECCIONES */
-        .grid-cats { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; width: 100%; }
-        .card-cat { background: #111827; border: 1px solid #1f2937; padding: 40px; border-radius: 12px; transition: border 0.3s; }
-        .card-cat:hover { border-color: #00f2fe; }
-        .card-cat h3 { font-size: 24px; margin-bottom: 15px; color: #fff; }
-        .card-cat p { color: #9ca3af; margin-bottom: 25px; font-size: 15px; line-height: 1.5; }
-        
-        .cat-half { flex: 1; min-width: 280px; }
-        .cat-full { flex: 0 1 calc(50% - 13px); min-width: 280px; }
-        
-        .btn-card { display: inline-block; background: transparent; border: 2px solid #00f2fe; color: #00f2fe; padding: 10px 25px; text-decoration: none; font-weight: bold; border-radius: 6px; transition: all 0.3s; cursor: pointer; }
-        .btn-card:hover { background: #00f2fe; color: #0b0f19; }
+<style>
+/* Variables de Identidad */
+:root {
+  --bg-dark: #0a0a0c;
+  --bg-card: #121216;
+  --accent-blue: #00e5ff;
+  --text-main: #ffffff;
+  --text-muted: #a0a0aa;
+}
 
-        /* Estructura de páginas */
-        .page { display: none; padding: 60px 20px; max-width: 1200px; margin: 0 auto; width: 100%; }
-        #inicio-page { display: block; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
 
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 60px; text-align: left; }
-        .product-card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; overflow: hidden; transition: transform 0.3s, border-color 0.3s; }
-        .product-card:hover { transform: translateY(-5px); border-color: #00f2fe; }
-        .product-img { width: 100%; height: 280px; background: #1f2937; display: flex; align-items: center; justify-content: center; color: #4b5563; font-size: 40px; }
-        .product-info { padding: 20px; }
-        .product-title { font-size: 18px; font-weight: bold; color: #fff; margin-bottom: 8px; }
-        .product-desc { font-size: 14px; color: #9ca3af; margin-bottom: 15px; height: 40px; overflow: hidden; line-height: 1.4; }
-        .product-footer { display: flex; justify-content: space-between; align-items: center; }
-        .product-price { font-size: 20px; font-weight: 800; color: #00f2fe; }
-        .btn-buy { background: #1f2937; color: #fff; border: 1px solid #1f2937; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: bold; transition: all 0.3s; }
-        .product-card:hover .btn-buy { background: #00f2fe; color: #0b0f19; border-color: #00f2fe; }
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
 
-        .btn-back { display: inline-block; margin-bottom: 30px; background: #1f2937; color: #fff; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; transition: 0.3s; cursor: pointer; border: none; }
-        .btn-back:hover { background: #00f2fe; color: #0b0f19; }
+/* Ticker / Marquee */
+.announcement-ticker {
+  background-color: #000000;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+}
 
-        /* FAQ */
-        .faq-container { text-align: left; max-width: 800px; margin: 0 auto 50px auto; }
-        .faq-item { background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 25px; margin-bottom: 15px; }
-        .faq-question { font-size: 18px; font-weight: bold; color: #00f2fe; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-        .faq-answer { color: #9ca3af; font-size: 15px; line-height: 1.6; }
+.ticker-wrap {
+  display: inline-block;
+  animation: ticker 20s linear infinite;
+}
 
-        /* Contacto */
-        .contact-container { max-width: 600px; margin: 0 auto 50px auto; background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 40px; text-align: left; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; color: #9ca3af; font-size: 14px; font-weight: 500; }
-        .form-group input, .form-group textarea { width: 100%; padding: 12px; background: #1f2937; border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 15px; transition: border-color 0.3s; outline: none; }
-        .form-group input:focus, .form-group textarea:focus { border-color: #00f2fe; }
-        .form-group textarea { resize: vertical; min-height: 120px; }
-        .btn-submit { background: #00f2fe; color: #0b0f19; font-weight: bold; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-size: 15px; width: 100%; transition: transform 0.2s; }
-        .btn-submit:hover { transform: scale(1.02); }
+.ticker-item {
+  display: inline-block;
+  color: var(--accent-blue);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding-right: 15rem;
+}
 
-        footer { background: #111827; border-top: 1px solid #1f2937; padding: 40px 20px; text-align: center; margin-top: auto; }
-        .footer-title { font-size: 16px; font-weight: bold; letter-spacing: 2px; color: #00f2fe; margin-bottom: 20px; }
-        .footer-links { margin-bottom: 20px; }
-        .footer-links a { color: #9ca3af; text-decoration: none; font-size: 14px; margin: 0 10px; transition: color 0.3s; cursor: pointer; }
-        .footer-links a:hover { color: #00f2fe; }
-        .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 25px; flex-wrap: wrap; }
-        .social-links a { color: #9ca3af; text-decoration: none; font-size: 28px; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #1f2937; transition: all 0.3s; }
-        .social-links a:hover { color: #00f2fe; background: #111827; box-shadow: 0 0 10px rgba(0, 242, 254, 0.3); transform: translateY(-3px); }
-        .copyright { color: #6b7280; font-size: 13px; }
-    </style>
-</head>
-<body>
+@keyframes ticker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-33.33%, 0, 0); }
+}
 
-    <div class="announcement-bar">
-        <div class="ticker-wrapper">
-            <div class="ticker-text">
-                🔥 ENVÍO GRATUITO EN PEDIDOS SUPERIORES A 50€ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🌐 EDICIONES EXCLUSIVAS BAJO DEMANDA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⚡ SOPORTE OFICIAL DISPONIBLE EN REDES &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🔥 ENVÍO GRATUITO EN PEDIDOS SUPERIORES A 50€ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🌐 EDICIONES EXCLUSIVAS BAJO DEMANDA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⚡ SOPORTE OFICIAL DISPONIBLE EN REDES
-            </div>
+/* Cabecera */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 5%;
+  background-color: rgba(10, 10, 12, 0.95);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-left: 25px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--accent-blue);
+}
+
+/* SPA Logica de visibilidad */
+.spa-section {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  padding: 40px 5%;
+  min-height: 70vh;
+}
+
+.spa-section.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero h1 {
+  font-size: 52px;
+  letter-spacing: 4px;
+  margin-bottom: 15px;
+  font-weight: 800;
+}
+
+.hero p {
+  color: var(--text-muted);
+  font-size: 16px;
+  margin-bottom: 35px;
+}
+
+/* CAMBIO 7: Estilos del Contador FOMO con Eco Visual */
+.fomo-counter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  background: rgba(18, 18, 22, 0.6);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.fomo-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.fomo-text span {
+  color: var(--text-main);
+  font-weight: bold;
+}
+
+.live-dot-container {
+  position: relative;
+  width: 8px;
+  height: 8px;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-blue);
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.live-pulse {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-blue);
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  animation: pulse-trail 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+@keyframes pulse-trail {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(3.5);
+    opacity: 0;
+  }
+}
+
+/* Botones */
+.btn-primary {
+  background-color: transparent;
+  color: var(--accent-blue);
+  border: 2px solid var(--accent-blue);
+  padding: 12px 35px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-blue);
+  color: #000;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+}
+
+/* Estilo para el botón Volver al inicio */
+.btn-back-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+/* Contenedor Colecciones (Triángulo invertido) */
+.collections-container {
+  max-width: 1100px;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.row-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.row-bottom {
+  display: flex;
+  justify-content: center;
+}
+
+.collection-card {
+  position: relative;
+  height: 350px;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  width: 100%;
+}
+
+.collection-card.central {
+  width: 50%;
+}
+
+.card-bg {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(40%) brightness(50%);
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.collection-card:hover .card-bg {
+  transform: scale(1.05);
+  filter: grayscale(0%) brightness(60%);
+}
+
+.card-content {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  z-index: 2;
+}
+
+.card-content h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-card {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 8px 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s;
+}
+
+.collection-card:hover .btn-card {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+/* Catálogos de Productos */
+.section-title {
+  text-align: center;
+  font-size: 32px;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background-color: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.03);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 229, 255, 0.3);
+}
+
+.product-img {
+  width: 100%;
+  height: 280px;
+  background-size: cover;
+  background-position: center;
+}
+
+.product-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-info h4 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.product-info p {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 15px;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+.product-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--accent-blue);
+  margin-bottom: 15px;
+}
+
+.btn-buy {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.product-card:hover .btn-buy {
+  background-color: var(--accent-blue);
+  color: #000;
+  border-color: var(--accent-blue);
+}
+
+/* Contacto y FAQ UI */
+.contact-container, .faq-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-container h2, .faq-container h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.form-group input, .form-group textarea {
+  width: 100%;
+  background-color: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 12px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--accent-blue);
+}
+
+.faq-item {
+  background-color: var(--bg-card);
+  padding: 25px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border-left: 3px solid var(--accent-blue);
+}
+
+.faq-item h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.faq-item p {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Footer */
+.main-footer {
+  background-color: #000;
+  padding: 40px 5%;
+  margin-top: 60px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-links {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--accent-blue);
+}
+
+.footer-links .separator {
+  margin: 0 10px;
+  color: rgba(255, 255, 255, 0.15);
+}
+
+.footer-socials a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 20px;
+  margin: 0 12px;
+  transition: color 0.3s, transform 0.3s;
+  display: inline-block;
+}
+
+.footer-socials a:hover {
+  color: var(--accent-blue);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .row-top { grid-template-columns: 1fr; }
+  .collection-card.central { width: 100%; }
+  .hero h1 { font-size: 36px; }
+}
+</style>
+
+<div class="announcement-ticker">
+  <div class="ticker-wrap">
+    <div class="ticker-item">🔥 ENVÍO GRATUITO EN PEDIDOS SUPERIORES A 50€</div>
+    <div class="ticker-item">🌐 EDICIONES EXCLUSIVAS BAJO DEMANDA</div>
+    <div class="ticker-item">⚡ SOPORTE OFICIAL DISPONIBLE EN REDES</div>
+  </div>
+</div>
+
+<header class="main-header">
+  <div class="logo" onclick="showSection('home')">NovaGen Supply</div>
+  <nav class="nav-links">
+    <a href="#" onclick="showSection('home')">Inicio</a>
+    <a href="#" onclick="showSection('ropa')">Ropa</a>
+    <a href="#" onclick="showSection('calzado')">Calzado</a>
+    <a href="#" onclick="showSection('accesorios')">Accesorios</a>
+    <a href="#" onclick="showSection('contacto')">Contacto</a>
+  </nav>
+</header>
+
+<main id="spa-container">
+  <section id="home-view" class="spa-section active">
+    <div class="hero">
+      <h1>PROPULSA TU ESTILO</h1>
+      <p>Prendas, calzado y accesorios exclusivos seleccionados para tu día a día.</p>
+      <button class="btn-primary" onclick="scrollToCollections()">Explorar catálogo</button>
+      
+      <div class="fomo-counter">
+        <div class="live-dot-container">
+          <div class="live-dot"></div>
+          <div class="live-pulse"></div>
         </div>
+        <div class="fomo-text"><span id="active-users">--</span> personas están explorando la tienda en este momento.</div>
+      </div>
     </div>
 
-    <header>
-        <div class="logo" onclick="mostrarPagina('inicio')">NOVAGEN SUPPLY</div>
-        <nav>
-            <a onclick="mostrarPagina('inicio')">Inicio</a>
-            <a onclick="mostrarPagina('ropa')">Ropa</a>
-            <a onclick="mostrarPagina('calzado')">Calzado</a>
-            <a onclick="mostrarPagina('accesorios')">Accesorios</a>
-            <a onclick="mostrarPagina('contacto')">Contacto</a>
-        </nav>
-    </header>
-
-    <div id="inicio-page" class="page">
-        <section class="hero">
-            <h1>PROPULSA TU ESTILO</h1>
-            <p>Prendas urbanas, calzado exclusivo y accesorios seleccionados para el día a día.</p>
-            <button class="btn-main" onclick="bajarAColecciones()">EXPLORAR CATÁLOGO</button>
-        </section>
-
-        <div class="sections-container" id="seccion-colecciones">
-            <h2 class="section-title">Colecciones</h2>
-            <div class="grid-cats">
-                <div class="card-cat cat-half">
-                    <h3>Ropa General</h3>
-                    <p>Sudaderas, camisetas y conjuntos con el mejor fit callejero.</p>
-                    <button class="btn-card" onclick="mostrarPagina('ropa')">Ver Ropa</button>
-                </div>
-                <div class="card-cat cat-half">
-                    <h3>Calzado</h3>
-                    <p>Zapatillas urbanas y deportivas técnicas de edición limitada.</p>
-                    <button class="btn-card" onclick="mostrarPagina('calzado')">Ver Calzado</button>
-                </div>
-                <div class="card-cat cat-full">
-                    <h3>Accesorios</h3>
-                    <p>Relojes, pulseras y collares diseñados para marcar la diferencia.</p>
-                    <button class="btn-card" onclick="mostrarPagina('accesorios')">Ver Accesorios</button>
-                </div>
-            </div>
+    <div id="collections-section" class="collections-container">
+      <div class="row-top">
+        <div class="collection-card" onclick="showSection('ropa')">
+          <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=600&auto=format&fit=crop')"></div>
+          <div class="card-content">
+            <h3>Ropa General</h3>
+            <button class="btn-card">Ver Ropa</button>
+          </div>
         </div>
+        <div class="collection-card" onclick="showSection('calzado')">
+          <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=600&auto=format&fit=crop')"></div>
+          <div class="card-content">
+            <h3>Calzado</h3>
+            <button class="btn-card">Ver Calzado</button>
+          </div>
+        </div>
+      </div>
+      <div class="row-bottom">
+        <div class="collection-card central" onclick="showSection('accesorios')">
+          <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop')"></div>
+          <div class="card-content">
+            <h3>Accesorios</h3>
+            <button class="btn-card">Ver Accesorios</button>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div id="ropa-page" class="page">
-        <button class="btn-back" onclick="mostrarPagina('inicio')"><i class="fas fa-arrow-left"></i> Volver al Inicio</button>
-        <h2 class="section-title" style="text-align: center;">Ropa General</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-img"><i class="fas fa-shirt"></i></div>
-                <div class="product-info">
-                    <div class="product-title">Sudadera Oversize "Nova"</div>
-                    <div class="product-desc">Algodón pesado, corte drop shoulder perfecto.</div>
-                    <div class="product-footer">
-                        <div class="product-price">39.99€</div>
-                        <a href="#" class="btn-buy">Comprar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-img"><i class="fas fa-vest"></i></div>
-                <div class="product-info">
-                    <div class="product-title">Conjunto Street Track</div>
-                    <div class="product-desc">Chaqueta y pantalón combinados hoy reflectantes.</div>
-                    <div class="product-footer">
-                        <div class="product-price">54.99€</div>
-                        <a href="#" class="btn-buy">Comprar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <section id="ropa-view" class="spa-section">
+    <h2 class="section-title">Colección Ropa</h2>
+    <div class="products-grid" id="grid-ropa"></div>
+    <div class="btn-back-container">
+      <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
     </div>
+  </section>
 
-    <div id="calzado-page" class="page">
-        <button class="btn-back" onclick="mostrarPagina('inicio')"><i class="fas fa-arrow-left"></i> Volver al Inicio</button>
-        <h2 class="section-title" style="text-align: center;">Calzado & Sneaker</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-img"><i class="fas fa-shoe-prints"></i></div>
-                <div class="product-info">
-                    <div class="product-title">Zapatillas Cyber-Fit</div>
-                    <div class="product-desc">Diseño urbano técnico con suela amortiguada.</div>
-                    <div class="product-footer">
-                        <div class="product-price">79.99€</div>
-                        <a href="#" class="btn-buy">Comprar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <section id="calzado-view" class="spa-section">
+    <h2 class="section-title">Colección Calzado</h2>
+    <div class="products-grid" id="grid-calzado"></div>
+    <div class="btn-back-container">
+      <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
     </div>
+  </section>
 
-    <div id="accesorios-page" class="page">
-        <button class="btn-back" onclick="mostrarPagina('inicio')"><i class="fas fa-arrow-left"></i> Volver al Inicio</button>
-        <h2 class="section-title" style="text-align: center;">Accesorios Exclusivos</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-img"><i class="fas fa-clock"></i></div>
-                <div class="product-info">
-                    <div class="product-title">Reloj Stealth Quartz</div>
-                    <div class="product-desc">Acabado negro mate, resistente al agua.</div>
-                    <div class="product-footer">
-                        <div class="product-price">45.00€</div>
-                        <a href="#" class="btn-buy">Comprar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <section id="accesorios-view" class="spa-section">
+    <h2 class="section-title">Colección Accesorios</h2>
+    <div class="products-grid" id="grid-accesorios"></div>
+    <div class="btn-back-container">
+      <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
     </div>
+  </section>
 
-    <div id="faq-page" class="page">
-        <button class="btn-back" onclick="mostrarPagina('inicio')"><i class="fas fa-arrow-left"></i> Volver al Inicio</button>
-        <h2 class="section-title" style="text-align: center;">Preguntas Frecuentes</h2>
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question"><i class="fas fa-truck"></i> ¿Cuánto tardan los envíos y cuál es su coste?</div>
-                <div class="faq-answer">Trabajamos bajo demanda directamente con nuestros centros de logística internacionales principales. El plazo de entrega total estimado ronda los 15-18 días laborables. Envío gratuito en pedidos superiores a 50€.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question"><i class="fas fa-credit-card"></i> ¿Qué métodos de pago aceptáis?</div>
-                <div class="faq-answer">Tarjetas de crédito y débito, PayPal, Apple Pay y Google Pay mediante pasarelas seguras.</div>
-            </div>
+  <section id="contacto-view" class="spa-section">
+    <div class="contact-container">
+      <h2>Contacto</h2>
+      <form id="contact-form" onsubmit="handleContactForm(event)">
+        <div class="form-group">
+          <label>Tu Nombre</label>
+          <input type="text" required placeholder="Tu Nombre">
         </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" required placeholder="ejemplo@correo.com">
+        </div>
+        <div class="form-group">
+          <label>¿En qué podemos ayudarte?</label>
+          <textarea required rows="5" placeholder="Escribe aquí tu consulta sobre pedidos, tallas, colaboraciones..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Enviar Mensaje</button>
+      </form>
     </div>
-
-    <div id="contacto-page" class="page">
-        <button class="btn-back" onclick="mostrarPagina('inicio')"><i class="fas fa-arrow-left"></i> Volver al Inicio</button>
-        <h2 class="section-title" style="text-align: center;">Soporte & Contacto</h2>
-        <div class="contact-container">
-            <form onsubmit="event.preventDefault(); alert('¡Mensaje enviado!');">
-                <div class="form-group"><label>Nombre</label><input type="text" required></div>
-                <div class="form-group"><label>Correo Electrónico</label><input type="email" required></div>
-                <div class="form-group"><label>Mensaje</label><textarea required></textarea></div>
-                <button type="submit" class="btn-submit">Enviar Mensaje</button>
-            </form>
-        </div>
+    <div class="btn-back-container">
+      <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
     </div>
+  </section>
 
-    <footer>
-        <div class="footer-title">NOVAGEN SUPPLY OUTLET</div>
-        <div class="footer-links">
-            <a onclick="mostrarPagina('faq')">Preguntas Frecuentes</a> | 
-            <a onclick="mostrarPagina('contacto')">Contacto</a>
-        </div>
-        <div class="social-links">
-            <a href="https://www.instagram.com/novagen.supply" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.tiktok.com/@novagen.supply" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
-            <a href="https://www.facebook.com/profile.php?id=NovaGenSupply" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://pinterest.com" target="_blank" title="Pinterest"><i class="fab fa-pinterest-p"></i></a>
-            <a href="https://whatsapp.com" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://youtube.com" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-        </div>
-        <div class="copyright">&copy; 2026 NovaGen Supply. Todos los derechos reservados.</div>
-    </footer>
+  <section id="faq-view" class="spa-section">
+    <div class="faq-container">
+      <h2>Preguntas Frecuentes</h2>
+      <div class="faq-item">
+        <h3>¿Cuánto tardan los envíos y cuál es su coste?</h3>
+        <p>Para mantener la máxima exclusividad y ofrecerte precios ajustados sin sobreproducción, trabajamos bajo demanda directamente con nuestros centers de logística internacionales principales. El plazo de entrega total estimado ronda los 15-18 días laborables. ¡Te aseguramos que la espera merece totalmente la pena! Además, el envío es gratuito en pedidos superiores a 50€ (3.95€ para inferiores).</p>
+      </div>
+      <div class="faq-item">
+        <h3>¿Qué métodos de pago aceptáis?</h3>
+        <p>Aceptamos tarjetas de crédito y débito (Visa, Mastercard), PayPal, Apple Pay y Google Pay. Todos los pagos se procesan de forma 100% segura y encriptada a través de pasarelas de pago oficiales protegidas (Stripe).</p>
+      </div>
+      <div class="faq-item">
+        <h3>¿Cómo puedo realizar una devolución o cambio de talla?</h3>
+        <p>Dispones de 14 días naturales desde que recibes tu paquete para solicitar un cambio o devolución. El producto debe estar sin usar y conservar sus etiquetas. Para gestionarlo, escríbenos directamente a cualquiera de nuestras redes sociales oficiales o métodos de contacto habilitados en la web y te guiaremos en el proceso.</p>
+      </div>
+      <div class="faq-item">
+        <h3>¿Cómo sé cuál es mi talla correcta?</h3>
+        <p>Dado que muchas de nuestras prendas tienen un ajuste "Oversize" de corte urbano, te recomendamos pedir tu talla habitual si buscas ese fit holgado. Si prefieres que te quede más entallada, selecciona una talla menos.</p>
+      </div>
+    </div>
+    <div class="btn-back-container">
+      <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
+    </div>
+  </section>
+</main>
 
-    <script>
-        function mostrarPagina(idPagina) {
-            document.getElementById('inicio-page').style.display = 'none';
-            document.getElementById('ropa-page').style.display = 'none';
-            document.getElementById('calzado-page').style.display = 'none';
-            document.getElementById('accesorios-page').style.display = 'none';
-            document.getElementById('faq-page').style.display = 'none';
-            document.getElementById('contacto-page').style.display = 'none';
-            document.getElementById(idPagina + '-page').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-        function bajarAColecciones() {
-            document.getElementById('seccion-colecciones').scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
-</body>
-</html>
+<footer class="main-footer">
+  <div class="footer-links">
+    <a href="#" onclick="showSection('faq')">Preguntas Frecuentes</a>
+    <span class="separator">|</span>
+    <a href="#" onclick="showSection('contacto')">Contacto</a>
+  </div>
+  <div class="footer-socials">
+    <a href="https://wa.me/yourphonenumber" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.instagram.com/novagen.supply" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.tiktok.com/@novagen.supply" target="_blank" rel="noopener" title="TikTok"><i class="fab fa-tiktok"></i></a>
+    <a href="https://www.facebook.com" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.youtube.com" target="_blank" rel="noopener" title="YouTube"><i class="fab fa-youtube"></i></a>
+    <a href="https://www.pinterest.com" target="_blank" rel="noopener" title="Pinterest"><i class="fab fa-pinterest"></i></a>
+  </div>
+</footer>
+
+<script>
+const productsData = {
+  ropa: [
+    { name: "Cyber Oversize Hoodie", desc: "Sudadera de algodón premium con detalles reflectantes.", price: "65.00€", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=400&auto=format&fit=crop" },
+    { name: "Nova Cargo Pants", desc: "Pantalones técnicos con múltiples bolsillos y ajuste tobillero.", price: "80.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
+    { name: "Graphic Tech Tee", desc: "Camiseta de corte pesado con estampado cibernético.", price: "35.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
+    { name: "Phantom Windbreaker", desc: "Chaqueta ligera impermeable con cremalleras termoselladas.", price: "95.00€", img: "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=400&auto=format&fit=crop" }
+  ],
+  calzado: [
+    { name: "Gen-X Cyber Sneakers", desc: "Zapatillas futuristas con suela amortiguada de gel neón.", price: "140.00€", img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=400&auto=format&fit=crop" },
+    { name: "Neon Flux Boots", desc: "Botas urbanas de caña alta con materiales técnicos sintéticos.", price: "165.00€", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?q=80&w=400&auto=format&fit=crop" },
+    { name: "Quantum Runner", desc: "Calzado de running urbano ultraligero y transpirable.", price: "120.00€", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=400&auto=format&fit=crop" },
+    { name: "Void Slip-On", desc: "Zapatillas cómodas sin cordones con patrón reflectante.", price: "85.00€", img: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=400&auto=format&fit=crop" }
+  ],
+  accesorios: [
+    { name: "Chrono Cyber Watch", desc: "Reloj digital mate con pantalla azul eléctrica.", price: "110.00€", img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=400&auto=format&fit=crop" },
+    { name: "Obsidian Chain Link", desc: "Cadena de eslabones reforzados en acabado acero oscuro.", price: "25.00€", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=400&auto=format&fit=crop" },
+    { name: "Neon Cyber Glasses", desc: "Gafas de sol con lentes de espejo azul eléctrico.", price: "40.00€", img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=400&auto=format&fit=crop" },
+    { name: "Utility Chest Rig", desc: "Arnés frontal técnico para llevar pertenencias esenciales.", price: "50.00€", img: "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?q=80&w=400&auto=format&fit=crop" }
+  ]
+};
+
+function injectProducts() {
+  for (const category in productsData) {
+    const grid = document.getElementById(`grid-${category}`);
+    if (!grid) continue;
+    
+    productsData[category].forEach(prod => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `
+        <div class="product-img" style="background-image: url('${prod.img}')"></div>
+        <div class="product-info">
+          <h4>${prod.name}</h4>
+          <p>${prod.desc}</p>
+          <div class="product-price">${prod.price}</div>
+          <button class="btn-buy" onclick="alert('Producto añadido al carrito temporal.')">Comprar</button>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+}
+
+function showSection(sectionId) {
+  const sections = document.querySelectorAll('.spa-section');
+  
+  sections.forEach(sec => {
+    sec.classList.remove('active');
+    sec.style.opacity = 0;
+  });
+
+  const targetSection = document.getElementById(`${sectionId}-view`);
+  if (targetSection) {
+    targetSection.classList.add('active');
+    setTimeout(() => { targetSection.style.opacity = 1; }, 50);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function scrollToCollections() {
+  document.getElementById('collections-section').scrollIntoView({ behavior: 'smooth' });
+}
+
+function handleContactForm(e) {
+  e.preventDefault();
+  alert("¡Mensaje enviado con éxito de manera profesional! Nos pondremos en contacto contigo lo antes posible.");
+  e.target.reset();
+}
+
+// CAMBIO 7: Lógica del simulador dinámico del contador inteligente
+function startFomoCounter() {
+  const counterElement = document.getElementById('active-users');
+  if (!counterElement) return;
+
+  function getRandomUsers() {
+    const rand = Math.random();
+    // 75% de probabilidad para el rango creíble (40 a 90)
+    if (rand < 0.75) {
+      return Math.floor(Math.random() * (90 - 40 + 1)) + 40;
+    } else {
+      // 25% de probabilidad para los extremos (0-39 o 91-100)
+      return Math.random() < 0.5 
+        ? Math.floor(Math.random() * 40) 
+        : Math.floor(Math.random() * (100 - 91 + 1)) + 91;
+    }
+  }
+
+  // Número inicial real
+  let currentUsers = getRandomUsers();
+  counterElement.textContent = currentUsers;
+
+  // Fluctuación dinámica regulada cada 4.5 segundos
+  setInterval(() => {
+    const targetUsers = getRandomUsers();
+    // Suaviza el cambio simulando pequeños pasos de subida/bajada
+    const difference = targetUsers - currentUsers;
+    const step = difference > 0 ? Math.ceil(difference * 0.4) : Math.floor(difference * 0.4);
+    currentUsers += step;
+    
+    counterElement.textContent = currentUsers;
+  }, 4500);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  injectProducts();
+  startFomoCounter(); // Inicializa el contador
+});
+</script>
