@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Ticker / Marquee */
+/* CAMBIO 11: Barra de Anuncios (Ticker) acelerada a 15s para mayor dinamismo */
 .announcement-ticker {
   background-color: #000000;
   overflow: hidden;
@@ -34,7 +34,7 @@ body {
 
 .ticker-wrap {
   display: inline-block;
-  animation: ticker 20s linear infinite;
+  animation: ticker 15s linear infinite;
 }
 
 .ticker-item {
@@ -75,20 +75,62 @@ body {
 
 .nav-links {
   display: flex;
+  align-items: center;
 }
 
+/* CAMBIO 11: Estilos de escritorio base (Muestra texto, oculta iconos de secciones) */
 .nav-links a {
   color: var(--text-muted);
   text-decoration: none;
   margin-left: 25px;
   font-size: 14px;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: color 0.3s;
+  position: relative;
+  transition: color 0.3s, transform 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-links a:hover {
   color: var(--accent-blue);
+  transform: scale(1.05);
+}
+
+/* Ocultar los iconos de navegación en PC */
+.nav-links a i.nav-icon {
+  display: none;
+}
+
+/* Forzar que el icono del carrito siempre sea visible */
+.nav-links a.cart-link i {
+  display: inline-block !important;
+  font-size: 18px;
+}
+
+/* Globo indicador del carrito */
+.cart-link {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -7px;
+  right: -9px;
+  background-color: var(--accent-blue);
+  color: #000000;
+  font-size: 10px;
+  font-weight: bold;
+  min-width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
 }
 
 /* SPA Logica de visibilidad */
@@ -181,14 +223,8 @@ body {
 }
 
 @keyframes pulse-trail {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(3.5);
-    opacity: 0;
-  }
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(3.5); opacity: 0; }
 }
 
 /* Botones */
@@ -211,7 +247,6 @@ body {
   box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
 }
 
-/* Estilo para el botón Volver al inicio */
 .btn-back-container {
   display: flex;
   justify-content: center;
@@ -219,7 +254,34 @@ body {
   margin-bottom: 20px;
 }
 
-/* Contenedor Colecciones (Triángulo invertido) */
+/* Contenedor para Estado de Carrito Vacío */
+.empty-cart-container {
+  text-align: center;
+  padding: 60px 20px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.empty-cart-container i {
+  font-size: 64px;
+  color: var(--text-muted);
+  margin-bottom: 25px;
+}
+
+.empty-cart-container h2 {
+  font-size: 28px;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.empty-cart-container p {
+  color: var(--text-muted);
+  font-size: 15px;
+  margin-bottom: 35px;
+}
+
+/* Contenedor Colecciones */
 .collections-container {
   max-width: 1100px;
   margin: 50px auto;
@@ -489,9 +551,8 @@ body {
   transform: translateY(-2px);
 }
 
-/* CAMBIO 8: Media Queries específicas para optimización móvil (< 768px) */
+/* CAMBIO 11: Media Queries para menú adaptativo e interactividad en smartphones */
 @media (max-width: 768px) {
-  /* Cabecera / Navegación */
   .main-header {
     flex-direction: column;
     gap: 15px;
@@ -501,63 +562,40 @@ body {
   .nav-links {
     width: 100%;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-wrap: nowrap;
+    gap: 5px;
   }
   
+  /* Ocultar las palabras del menú en móvil */
+  .nav-links a .nav-text {
+    display: none;
+  }
+  
+  /* Mostrar únicamente los iconos estilizados */
+  .nav-links a i.nav-icon {
+    display: inline-block;
+  }
+
   .nav-links a {
-    margin-left: 10px;
-    margin-right: 10px;
-    font-size: 12px;
+    margin-left: 12px;
+    margin-right: 12px;
+    font-size: 20px; /* Tamaño optimizado para interacciones táctiles */
+  }
+  
+  .nav-links a:hover {
+    transform: scale(1.1);
   }
 
-  /* Sección Principal Hero (Fuentes reducidas proporcionalmente) */
-  .hero {
-    padding: 60px 15px;
-  }
-  
-  .hero h1 {
-    font-size: 32px;
-    letter-spacing: 2px;
-  }
-  
-  .hero p {
-    font-size: 14px;
-    margin-bottom: 25px;
-    padding: 0 10px;
-  }
-
-  /* Contingencias de Estructura de Bloques (Colecciones) */
-  .row-top {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .collection-card.central {
-    width: 100%;
-  }
-  
-  .collection-card {
-    height: 280px;
-  }
-
-  /* Cuadrículas de catálogos y productos */
-  .products-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 0 10px;
-  }
-  
-  .section-title {
-    font-size: 24px;
-    margin-bottom: 25px;
-  }
-
-  /* Adaptación de textos informativos en móvil */
-  .fomo-text {
-    font-size: 11px;
-    text-align: center;
-  }
+  /* Secciones e interfaz */
+  .hero { padding: 60px 15px; }
+  .hero h1 { font-size: 32px; letter-spacing: 2px; }
+  .hero p { font-size: 14px; margin-bottom: 25px; padding: 0 10px; }
+  .row-top { grid-template-columns: 1fr; gap: 20px; }
+  .collection-card.central { width: 100%; }
+  .collection-card { height: 280px; }
+  .products-grid { grid-template-columns: 1fr; gap: 20px; padding: 0 10px; }
+  .section-title { font-size: 24px; margin-bottom: 25px; }
+  .fomo-text { font-size: 11px; text-align: center; }
 }
 </style>
 
@@ -572,11 +610,25 @@ body {
 <header class="main-header">
   <div class="logo" onclick="showSection('home')">NovaGen Supply</div>
   <nav class="nav-links">
-    <a href="#" onclick="showSection('home')">Inicio</a>
-    <a href="#" onclick="showSection('ropa')">Ropa</a>
-    <a href="#" onclick="showSection('calzado')">Calzado</a>
-    <a href="#" onclick="showSection('accesorios')">Accesorios</a>
-    <a href="#" onclick="showSection('contacto')">Contacto</a>
+    <a href="#" onclick="showSection('home')" title="Inicio">
+      <i class="fa-solid fa-house nav-icon"></i><span class="nav-text">Inicio</span>
+    </a>
+    <a href="#" onclick="showSection('ropa')" title="Ropa">
+      <i class="fa-solid fa-shirt nav-icon"></i><span class="nav-text">Ropa</span>
+    </a>
+    <a href="#" onclick="showSection('calzado')" title="Calzado">
+      <i class="fa-solid fa-shoe-prints nav-icon"></i><span class="nav-text">Calzado</span>
+    </a>
+    <a href="#" onclick="showSection('accesorios')" title="Accesorios">
+      <i class="fa-solid fa-gem nav-icon"></i><span class="nav-text">Accesorios</span>
+    </a>
+    <a href="#" onclick="showSection('contacto')" title="Contacto">
+      <i class="fa-solid fa-envelope nav-icon"></i><span class="nav-text">Contacto</span>
+    </a>
+    <a href="#" class="cart-link" onclick="showSection('carrito')" title="Carrito de Compras">
+      <i class="fa-solid fa-shopping-cart"></i>
+      <span class="cart-badge">0</span>
+    </a>
   </nav>
 </header>
 
@@ -694,6 +746,15 @@ body {
       </div>
     </div>
     <div class="btn-back-container">
+      <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
+    </div>
+  </section>
+
+  <section id="carrito-view" class="spa-section">
+    <div class="empty-cart-container">
+      <i class="fa-solid fa-basket-shopping"></i>
+      <h2>Tu carrito está vacío</h2>
+      <p>Parece que aún no has seleccionado ninguna pieza de nuestras colecciones exclusivas.</p>
       <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
     </div>
   </section>
