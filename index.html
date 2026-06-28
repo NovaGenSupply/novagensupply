@@ -359,6 +359,112 @@ body {
   color: var(--accent-blue);
 }
 
+/* NUEVOS ESTILOS: Solución Definitiva Carrusel de Opiniones de la Comunidad */
+.reviews-section {
+  max-width: 1100px;
+  margin: 80px auto 30px auto;
+  padding: 0 20px;
+}
+
+.reviews-viewport {
+  position: relative;
+  height: 480px; /* Tamaño ideal para contener 3 tarjetas visibles simultáneamente en PC */
+  overflow: hidden;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Degradados superiores e inferiores para suavizar bordes */
+  mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+}
+
+.reviews-track {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+
+/* Transición controlada para el desplazamiento fluido */
+.reviews-track.animated {
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Tarjeta base desenfocada y opaca */
+.review-card {
+  background-color: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 24px;
+  border-radius: 8px;
+  width: 600px;
+  min-height: 125px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  opacity: 0.25;
+  filter: blur(4px);
+  transform: scale(0.9);
+  transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Tarjeta del centro geométrico activa destacada */
+.review-card.active-review {
+  opacity: 1 !important;
+  filter: blur(0px) !important;
+  transform: scale(1.05) !important;
+  border-color: var(--accent-blue) !important;
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.25) !important;
+}
+
+.review-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: #18181b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-avatar i {
+  color: #52525b;
+  font-size: 22px;
+}
+
+.review-content {
+  flex-grow: 1;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.review-user {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-blue);
+}
+
+.review-stars {
+  color: #ffca28;
+  font-size: 11px;
+  display: flex;
+  gap: 2px;
+}
+
+.review-text {
+  color: var(--text-main);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
 /* Catálogos de Productos */
 .section-title {
   text-align: center;
@@ -596,6 +702,30 @@ body {
   .products-grid { grid-template-columns: 1fr; gap: 20px; padding: 0 10px; }
   .section-title { font-size: 24px; margin-bottom: 25px; }
   .fomo-text { font-size: 11px; text-align: center; }
+
+  /* COMPORTAMIENTO MÓVIL DEL CARRUSEL: Horizontal y adaptado */
+  .reviews-viewport {
+    height: 180px;
+    mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent);
+  }
+  
+  .reviews-track {
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .review-card {
+    width: 290px;
+    min-width: 290px;
+    min-height: 115px;
+    padding: 16px;
+  }
+  
+  .review-text {
+    font-size: 12px;
+  }
 }
 </style>
 
@@ -675,6 +805,119 @@ body {
         </div>
       </div>
     </div>
+
+    <section class="reviews-section">
+      <h2 class="section-title">Opiniones de la Comunidad</h2>
+      <div class="reviews-viewport" id="reviews-viewport">
+        <div class="reviews-track animated" id="reviews-track">
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@kevin_bcn_99</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Pillé unas New Balance 9060 y pal precio que están van increíbles. La verdad 100% recomendables."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@jona.leg</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Me llegó ayer la sudadera Supreme Box Logo en negro. El algodón es gordito del bueno y se nota la calidad."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@laa_jessii.05</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Loocuuura las Shox TL rosass."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@richy_mdlr</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Estrenando hoy las Adidas Campus 00s y quedan malladas con cualquier pantalón oversize. Compra de 💯."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@cristian_vlc_</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Menuda chaqueta la Nike Tech Fleece 😰."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@brayan._.autentikk</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Buscaba una cadena de plata y ni una defrauda. Pesa lo suyo y brilla mazo ✨."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@soraayaa_09</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"El colgante de oro con la cruz me llegó súper bien. El tamaño es ideal, ni muy grande ni muy fino. Queda precioso puesto."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@yasin_2r</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Pedazo de reloj el RM 🙏. Calidad de la buena."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@yeni_vallecas</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Me compré unos pendientes de oro 18k y son perfectos para el día a día. Súper elegantes y no pesan nada."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@samu_tk_</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"El cordón de plata es una pasada. Ni la acetona le cambia el color. 10/10."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@dani_el_rebelde</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"En la riñonera LV te cabe de todoouu jejeje ⬜."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@sheiliita_love</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"La gorra Balenciaga clásica flipas cómo queda. El ajuste de atrás va perfecto."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@maikol_flow_</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Gafas de sol de calidad. Los cristales polarizados se notan una barbaridad cuando pega el sol de frente. Muy top."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@joseba_antifaka</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"La cartera Supreme la llevas en los bolsillos del Tech y ni te enteras 💵."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@tami_la_gitanilla</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"El cinturón LV con las Dior B22 es cine ✋🫠🤚."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </section>
 
   <section id="ropa-view" class="spa-section">
@@ -874,8 +1117,136 @@ function startFomoCounter() {
   }, 4500);
 }
 
+// INICIALIZACIÓN Y MOTOR DEL CARRUSEL (RULETA INFINITA + ENFOQUE GEOMÉTRICO CENTRAL)
+function initReviewsCarousel() {
+  const track = document.getElementById('reviews-track');
+  const viewport = document.getElementById('reviews-viewport');
+  if (!track || !viewport) return;
+
+  const originalCards = Array.from(track.querySelectorAll('.review-card'));
+  const originalCount = originalCards.length;
+
+  // 1. Clonación de bloques espejo (antes y después) para permitir el bucle infinito sin saltos visuales
+  originalCards.forEach(card => {
+    const cloneBefore = card.cloneNode(true);
+    const cloneAfter = card.cloneNode(true);
+    track.appendChild(cloneAfter);
+    track.insertBefore(cloneBefore, track.firstChild);
+  });
+
+  let currentIndex = originalCount; 
+  let isTransitioning = false;
+
+  // Extrae de forma dinámica las dimensiones y márgenes de la interfaz según el dispositivo
+  function getLayoutMetrics() {
+    const sample = track.querySelector('.review-card');
+    const isMobile = window.innerWidth <= 768;
+    return {
+      isMobile: isMobile,
+      cardSize: isMobile ? sample.offsetWidth : sample.offsetHeight,
+      gap: isMobile ? 15 : 25
+    };
+  }
+
+  // 2. Función de Enfoque Geométrico Central Exacto (Calculado dinámicamente mediante getBoundingClientRect)
+  function highlightCenterCard() {
+    const viewRect = viewport.getBoundingClientRect();
+    const metrics = getLayoutMetrics();
+    
+    // Encuentra el centro del contenedor padre
+    const viewCenter = metrics.isMobile 
+      ? viewRect.left + viewRect.width / 2 
+      : viewRect.top + viewRect.height / 2;
+
+    const allCards = track.querySelectorAll('.review-card');
+    let closestCard = null;
+    let minDistance = Infinity;
+
+    allCards.forEach(card => {
+      const cardRect = card.getBoundingClientRect();
+      // Encuentra el centro de la tarjeta evaluada
+      const cardCenter = metrics.isMobile
+        ? cardRect.left + cardRect.width / 2
+        : cardRect.top + cardRect.height / 2;
+
+      const distance = Math.abs(cardCenter - viewCenter);
+      card.classList.remove('active-review');
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestCard = card;
+      }
+    });
+
+    // Remueve filtros y escala la tarjeta ganadora en el centro exacto
+    if (closestCard) {
+      closestCard.classList.add('active-review');
+    }
+  }
+
+  // Desplaza el track a la posición calculada
+  function move(animate = true) {
+    const metrics = getLayoutMetrics();
+    const totalStep = metrics.cardSize + metrics.gap;
+
+    if (animate) {
+      track.classList.add('animated');
+    } else {
+      track.classList.remove('animated');
+    }
+
+    if (metrics.isMobile) {
+      const offset = -(currentIndex * totalStep) + (viewport.offsetWidth / 2) - (metrics.cardSize / 2);
+      track.style.transform = `translateX(${offset}px)`;
+    } else {
+      const offset = -(currentIndex * totalStep) + (viewport.offsetHeight / 2) - (metrics.cardSize / 2);
+      track.style.transform = `translateY(${offset}px)`;
+    }
+
+    // Calcula el foco central tras ajustarse el desplazamiento
+    if (animate) {
+      setTimeout(highlightCenterCard, 100);
+    } else {
+      highlightCenterCard();
+    }
+  }
+
+  // 3. Control de límites (Salto invisible instantáneo al alcanzar los extremos clonados)
+  track.addEventListener('transitionend', () => {
+    isTransitioning = false;
+    
+    if (currentIndex >= originalCount * 2) {
+      currentIndex = originalCount;
+      move(false);
+    } else if (currentIndex < originalCount) {
+      currentIndex = originalCount * 2 - 1;
+      move(false);
+    }
+  });
+
+  // 4. Temporizador de ejecución continua ininterrumpida 24/7 (Sin pausas por interacción)
+  function startAutoCycle() {
+    setInterval(() => {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      currentIndex++;
+      move(true);
+    }, 3000);
+  }
+
+  // Recalcula posiciones si se rota o cambia el tamaño de la ventana
+  window.addEventListener('resize', () => move(false));
+
+  // Arranque inicial coordinado
+  setTimeout(() => {
+    move(false);
+    startAutoCycle();
+  }, 200);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   injectProducts();
   startFomoCounter();
+  initReviewsCarousel(); // Llama a la inicialización del carrusel corregido
 });
 </script>
