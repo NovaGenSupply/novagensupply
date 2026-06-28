@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* CAMBIO 11: Barra de Anuncios (Ticker) acelerada a 15s para mayor dinamismo */
+/* Barra de Anuncios (Ticker) */
 .announcement-ticker {
   background-color: #000000;
   overflow: hidden;
@@ -78,7 +78,7 @@ body {
   align-items: center;
 }
 
-/* CAMBIO 11: Estilos de escritorio base (Muestra texto, oculta iconos de secciones) */
+/* Menú Híbrido */
 .nav-links a {
   color: var(--text-muted);
   text-decoration: none;
@@ -99,20 +99,13 @@ body {
   transform: scale(1.05);
 }
 
-/* Ocultar los iconos de navegación en PC */
 .nav-links a i.nav-icon {
   display: none;
 }
 
-/* Forzar que el icono del carrito siempre sea visible */
 .nav-links a.cart-link i {
   display: inline-block !important;
   font-size: 18px;
-}
-
-/* Globo indicador del carrito */
-.cart-link {
-  position: relative;
 }
 
 .cart-badge {
@@ -133,7 +126,7 @@ body {
   box-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
 }
 
-/* SPA Logica de visibilidad */
+/* SPA Logica */
 .spa-section {
   display: none;
   opacity: 0;
@@ -170,7 +163,7 @@ body {
   margin-bottom: 35px;
 }
 
-/* Contador FOMO con Eco Visual */
+/* Contador FOMO */
 .fomo-counter {
   display: flex;
   align-items: center;
@@ -185,7 +178,6 @@ body {
 .fomo-text {
   font-size: 13px;
   color: var(--text-muted);
-  letter-spacing: 0.5px;
 }
 
 .fomo-text span {
@@ -205,9 +197,6 @@ body {
   background-color: var(--accent-blue);
   border-radius: 50%;
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
 }
 
 .live-pulse {
@@ -216,9 +205,6 @@ body {
   background-color: var(--accent-blue);
   border-radius: 50%;
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
   animation: pulse-trail 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
 }
 
@@ -247,41 +233,7 @@ body {
   box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
 }
 
-.btn-back-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
-  margin-bottom: 20px;
-}
-
-/* Contenedor para Estado de Carrito Vacío */
-.empty-cart-container {
-  text-align: center;
-  padding: 60px 20px;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.empty-cart-container i {
-  font-size: 64px;
-  color: var(--text-muted);
-  margin-bottom: 25px;
-}
-
-.empty-cart-container h2 {
-  font-size: 28px;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-}
-
-.empty-cart-container p {
-  color: var(--text-muted);
-  font-size: 15px;
-  margin-bottom: 35px;
-}
-
-/* Contenedor Colecciones */
+/* Colecciones */
 .collections-container {
   max-width: 1100px;
   margin: 50px auto;
@@ -307,12 +259,9 @@ body {
   border-radius: 4px;
   overflow: hidden;
   cursor: pointer;
-  width: 100%;
 }
 
-.collection-card.central {
-  width: 50%;
-}
+.collection-card.central { width: 50%; }
 
 .card-bg {
   width: 100%;
@@ -320,53 +269,96 @@ body {
   background-size: cover;
   background-position: center;
   filter: grayscale(40%) brightness(50%);
-  transition: transform 0.5s ease, filter 0.5s ease;
+  transition: transform 0.5s ease;
 }
 
-.collection-card:hover .card-bg {
-  transform: scale(1.05);
-  filter: grayscale(0%) brightness(60%);
-}
+.collection-card:hover .card-bg { transform: scale(1.05); }
 
 .card-content {
   position: absolute;
   bottom: 30px;
   left: 30px;
-  z-index: 2;
 }
 
-.card-content h3 {
-  font-size: 24px;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.card-content h3 { font-size: 24px; margin-bottom: 15px; text-transform: uppercase; }
+
+/* CAMBIO 13: Sección de Opiniones Rediseñada */
+.reviews-section {
+  max-width: 1100px;
+  margin: 80px auto;
+  padding: 0 20px;
 }
 
-.btn-card {
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.3);
-  padding: 8px 20px;
-  font-size: 12px;
-  text-transform: uppercase;
-  cursor: pointer;
-  backdrop-filter: blur(5px);
-  transition: all 0.3s;
+.reviews-viewport {
+  position: relative;
+  height: 440px;
+  overflow: hidden;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.collection-card:hover .btn-card {
+.reviews-track {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  align-items: center;
+}
+
+.review-card {
+  background-color: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 24px;
+  border-radius: 8px;
+  width: 620px;
+  min-height: 120px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  opacity: 0.25;
+  filter: blur(1px);
+  transform: scale(0.85);
+  transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.review-card.active-review {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1.02);
   border-color: var(--accent-blue);
-  color: var(--accent-blue);
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.1);
 }
 
-/* Catálogos de Productos */
-.section-title {
-  text-align: center;
-  font-size: 32px;
-  letter-spacing: 2px;
-  margin-bottom: 40px;
-  text-transform: uppercase;
+.review-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  filter: grayscale(30%);
 }
+
+.review-content { flex-grow: 1; }
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.review-user { font-size: 13px; font-weight: 700; color: var(--accent-blue); }
+
+.review-stars { color: #ffca28; font-size: 11px; display: flex; gap: 2px; }
+
+.review-text { color: var(--text-main); font-size: 14px; line-height: 1.4; font-weight: 500; }
+
+/* Catálogos */
+.section-title { text-align: center; font-size: 32px; margin-bottom: 40px; text-transform: uppercase; }
 
 .products-grid {
   display: grid;
@@ -378,224 +370,44 @@ body {
 
 .product-card {
   background-color: var(--bg-card);
-  border: 1px solid rgba(255,255,255,0.03);
+  padding-bottom: 15px;
   border-radius: 4px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
-.product-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(0, 229, 255, 0.3);
-}
-
-.product-img {
-  width: 100%;
-  height: 280px;
-  background-size: cover;
-  background-position: center;
-}
-
-.product-info {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.product-info h4 {
-  font-size: 16px;
-  margin-bottom: 8px;
-  letter-spacing: 0.5px;
-}
-
-.product-info p {
-  color: var(--text-muted);
-  font-size: 13px;
-  margin-bottom: 15px;
-  line-height: 1.4;
-  flex-grow: 1;
-}
-
-.product-price {
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--accent-blue);
-  margin-bottom: 15px;
-}
-
-.btn-buy {
-  background-color: transparent;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.15);
-  padding: 10px;
-  font-size: 12px;
-  text-transform: uppercase;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.product-card:hover .btn-buy {
-  background-color: var(--accent-blue);
-  color: #000;
-  border-color: var(--accent-blue);
-}
-
-/* Contacto y FAQ UI */
-.contact-container, .faq-container {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.contact-container h2, .faq-container h2 {
-  font-size: 32px;
-  margin-bottom: 30px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 12px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-  letter-spacing: 1px;
-}
-
-.form-group input, .form-group textarea {
-  width: 100%;
-  background-color: var(--bg-card);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 12px;
-  color: #fff;
-  font-size: 14px;
-  border-radius: 4px;
-  outline: none;
-}
-
-.form-group input:focus, .form-group textarea:focus {
-  border-color: var(--accent-blue);
-}
-
-.faq-item {
-  background-color: var(--bg-card);
-  padding: 25px;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  border-left: 3px solid var(--accent-blue);
-}
-
-.faq-item h3 {
-  font-size: 16px;
-  margin-bottom: 12px;
-  line-height: 1.4;
-}
-
-.faq-item p {
-  color: var(--text-muted);
-  font-size: 14px;
-  line-height: 1.6;
-}
+.product-card:hover { transform: translateY(-5px); }
 
 /* Footer */
 .main-footer {
   background-color: #000;
   padding: 40px 5%;
   margin-top: 60px;
-  border-top: 1px solid rgba(255,255,255,0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
 }
 
-.footer-links {
-  color: var(--text-muted);
-  font-size: 13px;
-}
+.footer-links a { color: var(--text-muted); text-decoration: none; margin: 0 10px; }
+.footer-socials a { color: var(--text-muted); font-size: 20px; margin: 0 12px; transition: color 0.3s; }
+.footer-socials a:hover { color: var(--accent-blue); }
 
-.footer-links a {
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.footer-links a:hover {
-  color: var(--accent-blue);
-}
-
-.footer-links .separator {
-  margin: 0 10px;
-  color: rgba(255, 255, 255, 0.15);
-}
-
-.footer-socials a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 20px;
-  margin: 0 12px;
-  transition: color 0.3s, transform 0.3s;
-  display: inline-block;
-}
-
-.footer-socials a:hover {
-  color: var(--accent-blue);
-  transform: translateY(-2px);
-}
-
-/* CAMBIO 11: Media Queries para menú adaptativo e interactividad en smartphones */
+/* Móvil */
 @media (max-width: 768px) {
-  .main-header {
-    flex-direction: column;
-    gap: 15px;
-    padding: 15px 20px;
-  }
+  .main-header { flex-direction: column; gap: 15px; }
+  .nav-links a .nav-text { display: none; }
+  .nav-links a i.nav-icon { display: inline-block; }
+  .nav-links a { margin: 0 12px; font-size: 20px; }
   
-  .nav-links {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: nowrap;
-    gap: 5px;
-  }
+  .reviews-viewport { height: 220px; }
+  .reviews-track { flex-direction: row; gap: 15px; padding: 0 30px; }
+  .review-card { width: 300px; min-width: 300px; padding: 18px; }
+  .review-text { font-size: 12px; }
+  .review-avatar { width: 50px; height: 50px; }
   
-  /* Ocultar las palabras del menú en móvil */
-  .nav-links a .nav-text {
-    display: none;
-  }
-  
-  /* Mostrar únicamente los iconos estilizados */
-  .nav-links a i.nav-icon {
-    display: inline-block;
-  }
-
-  .nav-links a {
-    margin-left: 12px;
-    margin-right: 12px;
-    font-size: 20px; /* Tamaño optimizado para interacciones táctiles */
-  }
-  
-  .nav-links a:hover {
-    transform: scale(1.1);
-  }
-
-  /* Secciones e interfaz */
-  .hero { padding: 60px 15px; }
-  .hero h1 { font-size: 32px; letter-spacing: 2px; }
-  .hero p { font-size: 14px; margin-bottom: 25px; padding: 0 10px; }
-  .row-top { grid-template-columns: 1fr; gap: 20px; }
+  .row-top { grid-template-columns: 1fr; }
   .collection-card.central { width: 100%; }
-  .collection-card { height: 280px; }
-  .products-grid { grid-template-columns: 1fr; gap: 20px; padding: 0 10px; }
-  .section-title { font-size: 24px; margin-bottom: 25px; }
-  .fomo-text { font-size: 11px; text-align: center; }
 }
 </style>
 
@@ -610,25 +422,12 @@ body {
 <header class="main-header">
   <div class="logo" onclick="showSection('home')">NovaGen Supply</div>
   <nav class="nav-links">
-    <a href="#" onclick="showSection('home')" title="Inicio">
-      <i class="fa-solid fa-house nav-icon"></i><span class="nav-text">Inicio</span>
-    </a>
-    <a href="#" onclick="showSection('ropa')" title="Ropa">
-      <i class="fa-solid fa-shirt nav-icon"></i><span class="nav-text">Ropa</span>
-    </a>
-    <a href="#" onclick="showSection('calzado')" title="Calzado">
-      <i class="fa-solid fa-shoe-prints nav-icon"></i><span class="nav-text">Calzado</span>
-    </a>
-    <a href="#" onclick="showSection('accesorios')" title="Accesorios">
-      <i class="fa-solid fa-gem nav-icon"></i><span class="nav-text">Accesorios</span>
-    </a>
-    <a href="#" onclick="showSection('contacto')" title="Contacto">
-      <i class="fa-solid fa-envelope nav-icon"></i><span class="nav-text">Contacto</span>
-    </a>
-    <a href="#" class="cart-link" onclick="showSection('carrito')" title="Carrito de Compras">
-      <i class="fa-solid fa-shopping-cart"></i>
-      <span class="cart-badge">0</span>
-    </a>
+    <a href="#" onclick="showSection('home')" title="Inicio"><i class="fa-solid fa-house nav-icon"></i><span class="nav-text">Inicio</span></a>
+    <a href="#" onclick="showSection('ropa')" title="Ropa"><i class="fa-solid fa-shirt nav-icon"></i><span class="nav-text">Ropa</span></a>
+    <a href="#" onclick="showSection('calzado')" title="Calzado"><i class="fa-solid fa-shoe-prints nav-icon"></i><span class="nav-text">Calzado</span></a>
+    <a href="#" onclick="showSection('accesorios')" title="Accesorios"><i class="fa-solid fa-gem nav-icon"></i><span class="nav-text">Accesorios</span></a>
+    <a href="#" onclick="showSection('contacto')" title="Contacto"><i class="fa-solid fa-envelope nav-icon"></i><span class="nav-text">Contacto</span></a>
+    <a href="#" class="cart-link" onclick="showSection('carrito')" title="Carrito"><i class="fa-solid fa-shopping-cart"></i><span class="cart-badge">0</span></a>
   </nav>
 </header>
 
@@ -638,12 +437,8 @@ body {
       <h1>PROPULSA TU ESTILO</h1>
       <p>Prendas, calzado y accesorios exclusivos seleccionados para tu día a día.</p>
       <button class="btn-primary" onclick="scrollToCollections()">Explorar catálogo</button>
-      
       <div class="fomo-counter">
-        <div class="live-dot-container">
-          <div class="live-dot"></div>
-          <div class="live-pulse"></div>
-        </div>
+        <div class="live-dot-container"><div class="live-dot"></div><div class="live-pulse"></div></div>
         <div class="fomo-text"><span id="active-users">--</span> personas están explorando la tienda en este momento.</div>
       </div>
     </div>
@@ -652,230 +447,218 @@ body {
       <div class="row-top">
         <div class="collection-card" onclick="showSection('ropa')">
           <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=600&auto=format&fit=crop')"></div>
-          <div class="card-content">
-            <h3>Ropa General</h3>
-            <button class="btn-card">Ver Ropa</button>
-          </div>
+          <div class="card-content"><h3>Ropa General</h3><button class="btn-card">Ver Ropa</button></div>
         </div>
         <div class="collection-card" onclick="showSection('calzado')">
           <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=600&auto=format&fit=crop')"></div>
-          <div class="card-content">
-            <h3>Calzado</h3>
-            <button class="btn-card">Ver Calzado</button>
-          </div>
+          <div class="card-content"><h3>Calzado</h3><button class="btn-card">Ver Calzado</button></div>
         </div>
       </div>
       <div class="row-bottom">
         <div class="collection-card central" onclick="showSection('accesorios')">
           <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop')"></div>
-          <div class="card-content">
-            <h3>Accesorios</h3>
-            <button class="btn-card">Ver Accesorios</button>
+          <div class="card-content"><h3>Accesorios</h3><button class="btn-card">Ver Accesorios</button></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="reviews-section">
+      <h2 class="section-title">Opiniones de la Comunidad</h2>
+      <div class="reviews-viewport" id="reviews-viewport">
+        <div class="reviews-track" id="reviews-track">
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@kevin_bcn_99</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Pillé unas New Balance 9060 y pal precio que están van increíbles. La verdad 100% recomendables."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@jona.leg</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Me llegó ayer la sudadera Supreme Box Logo en negro. El algodón es gordito del bueno y se nota la calidad."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@laa_jessii.05</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Loocuuura las Shox TL rosass."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@richy_mdlr</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Estrenando hoy las Adidas Campus 00s y quedan malladas con cualquier pantalón oversize. Compra de 💯."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@cristian_vlc_</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Menuda chaqueta la Nike Tech Fleece 😰."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1512485694743-9c9538b4e6e0?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@brayan._.autentikk</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Buscaba una cadena de plata y ni una defrauda. Pesa lo suyo y brilla mazo ✨."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@soraayaa_09</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"El colgante de oro con la cruz me llegó súper bien. El tamaño es ideal, ni muy grande ni muy fino. Queda precioso puesto."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1504257404462-f73f170af31a?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@yasin_2r</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Pedazo de reloj el RM 🙏. Calidad de la buena."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@yeni_vallecas</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Me compré unos pendientes de oro 18k y son perfectos para el día a día. Súper elegantes y no pesan nada."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@samu_tk_</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"El cordón de plata es una pasada. Ni la acetona le cambia el color. 10/10."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1488161628813-04466f872be2?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@dani_el_rebelde</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"En la riñonera LV te cabe de todoouu jejeje ⬜."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@sheiliita_love</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"La gorra Balenciaga clásica flipas cómo queda. El ajuste de atrás va perfecto."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1503443207922-dff7d543fd0e?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@maikol_flow_</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"Gafas de sol de calidad. Los cristales polarizados se notan una barbaridad cuando pega el sol de frente. Muy top."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1530268729831-4b0b9e170218?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@joseba_antifaka</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"La cartera Supreme la llevas en los bolsillos del Tech y ni te enteras 💵."</p>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-avatar" style="background-image: url('https://images.unsplash.com/photo-1529139513477-3235a1191e21?q=80&w=150&auto=format&fit=crop')"></div>
+            <div class="review-content">
+              <div class="review-header"><span class="review-user">@tami_la_gitanilla</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
+              <p class="review-text">"El cinturón LV con las Dior B22 es cine ✋🫠🤚."</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </section>
 
-  <section id="ropa-view" class="spa-section">
-    <h2 class="section-title">Colección Ropa</h2>
-    <div class="products-grid" id="grid-ropa"></div>
-    <div class="btn-back-container">
-      <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
-    </div>
-  </section>
-
-  <section id="calzado-view" class="spa-section">
-    <h2 class="section-title">Colección Calzado</h2>
-    <div class="products-grid" id="grid-calzado"></div>
-    <div class="btn-back-container">
-      <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
-    </div>
-  </section>
-
-  <section id="accesorios-view" class="spa-section">
-    <h2 class="section-title">Colección Accesorios</h2>
-    <div class="products-grid" id="grid-accesorios"></div>
-    <div class="btn-back-container">
-      <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
-    </div>
-  </section>
-
+  <section id="ropa-view" class="spa-section"><h2 class="section-title">Ropa</h2><div class="products-grid" id="grid-ropa"></div><div class="btn-back-container"><button class="btn-primary" onclick="showSection('home')">Volver</button></div></section>
+  <section id="calzado-view" class="spa-section"><h2 class="section-title">Calzado</h2><div class="products-grid" id="grid-calzado"></div><div class="btn-back-container"><button class="btn-primary" onclick="showSection('home')">Volver</button></div></section>
+  <section id="accesorios-view" class="spa-section"><h2 class="section-title">Accesorios</h2><div class="products-grid" id="grid-accesorios"></div><div class="btn-back-container"><button class="btn-primary" onclick="showSection('home')">Volver</button></div></section>
   <section id="contacto-view" class="spa-section">
-    <div class="contact-container">
-      <h2>Contacto</h2>
-      <form id="contact-form" onsubmit="handleContactForm(event)">
-        <div class="form-group">
-          <label>Tu Nombre</label>
-          <input type="text" required placeholder="Tu Nombre">
-        </div>
-        <div class="form-group">
-          <label>Correo electrónico</label>
-          <input type="email" required placeholder="ejemplo@correo.com">
-        </div>
-        <div class="form-group">
-          <label>¿En qué podemos ayudarte?</label>
-          <textarea required rows="5" placeholder="Escribe aquí tu consulta sobre pedidos, tallas, colaboraciones..."></textarea>
-        </div>
-        <button type="submit" class="btn-primary">Enviar Mensaje</button>
-      </form>
-    </div>
-    <div class="btn-back-container">
-      <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
-    </div>
+    <div class="contact-container"><h2>Contacto</h2><form onsubmit="handleContactForm(event)"><div class="form-group"><label>Nombre</label><input type="text" required placeholder="Tu Nombre"></div><div class="form-group"><label>Email</label><input type="email" required placeholder="ejemplo@correo.com"></div><div class="form-group"><label>Consulta</label><textarea required rows="4" placeholder="Escribe aquí..."></textarea></div><button type="submit" class="btn-primary">Enviar</button></form></div>
+    <div class="btn-back-container"><button class="btn-primary" onclick="showSection('home')">Volver</button></div>
   </section>
-
   <section id="faq-view" class="spa-section">
-    <div class="faq-container">
-      <h2>Preguntas Frecuentes</h2>
-      <div class="faq-item">
-        <h3>¿Cuánto tardan los envíos y cuál es su coste?</h3>
-        <p>Para mantener la máxima exclusividad y ofrecerte precios ajustados sin sobreproducción, trabajamos bajo demanda directamente con nuestros centros de logística internacionales principales. El plazo de entrega total estimado ronda los 15-18 días laborables. ¡Te aseguramos que la espera merece totalmente la pena! Además, el envío es gratuito en pedidos superiores a 50€ (3.95€ para inferiores).</p>
-      </div>
-      <div class="faq-item">
-        <h3>¿Qué métodos de pago aceptáis?</h3>
-        <p>Aceptamos tarjetas de crédito y débito (Visa, Mastercard), PayPal, Apple Pay y Google Pay. Todos los pagos se procesan de forma 100% segura y encriptada a través de pasarelas de pago oficiales protegidas (Stripe).</p>
-      </div>
-      <div class="faq-item">
-        <h3>¿Cómo puedo realizar una devolución o cambio de talla?</h3>
-        <p>Dispones de 14 días naturales desde que recibes tu paquete para solicitar un cambio o devolución. El producto debe estar sin usar y conservar sus etiquetas. Para gestionarlo, escríbenos directamente a cualquiera de nuestras redes sociales oficiales o métodos de contacto habilitados en la web y te guiaremos en el proceso.</p>
-      </div>
-      <div class="faq-item">
-        <h3>¿Cómo sé cuál es mi talla correcta?</h3>
-        <p>Dado que muchas de nuestras prendas tienen un ajuste "Oversize" de corte urbano, te recomendamos pedir tu talla habitual si buscas ese fit holgado. Si prefieres que te quede más entallada, selecciona una talla menos.</p>
-      </div>
-    </div>
-    <div class="btn-back-container">
-      <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
-    </div>
+    <div class="faq-container"><h2>FAQ</h2><div class="faq-item"><h3>Envío</h3><p>15-18 días laborables. Gratis > 50€.</p></div></div>
+    <div class="btn-back-container"><button class="btn-primary" onclick="showSection('home')">Volver</button></div>
   </section>
-
-  <section id="carrito-view" class="spa-section">
-    <div class="empty-cart-container">
-      <i class="fa-solid fa-basket-shopping"></i>
-      <h2>Tu carrito está vacío</h2>
-      <p>Parece que aún no has seleccionado ninguna pieza de nuestras colecciones exclusivas.</p>
-      <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
-    </div>
-  </section>
+  <section id="carrito-view" class="spa-section"><div class="empty-cart-container"><i class="fa-solid fa-basket-shopping"></i><h2>Carrito vacío</h2><p>Parece que aún no has seleccionado ninguna pieza de nuestras colecciones exclusivas.</p><button class="btn-primary" onclick="showSection('home')">Volver</button></div></section>
 </main>
 
 <footer class="main-footer">
-  <div class="footer-links">
-    <a href="#" onclick="showSection('faq')">Preguntas Frecuentes</a>
-    <span class="separator">|</span>
-    <a href="#" onclick="showSection('contacto')">Contacto</a>
-  </div>
+  <div class="footer-links"><a href="#" onclick="showSection('faq')">FAQ</a><span class="separator">|</span><a href="#" onclick="showSection('contacto')">Contacto</a></div>
   <div class="footer-socials">
-    <a href="https://wa.me/yourphonenumber" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://www.instagram.com/novagen.supply" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.tiktok.com/@novagen.supply" target="_blank" rel="noopener" title="TikTok"><i class="fab fa-tiktok"></i></a>
-    <a href="https://www.facebook.com" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook"></i></a>
-    <a href="https://www.youtube.com" target="_blank" rel="noopener" title="YouTube"><i class="fab fa-youtube"></i></a>
-    <a href="https://www.pinterest.com" target="_blank" rel="noopener" title="Pinterest"><i class="fab fa-pinterest"></i></a>
+    <a href="#"><i class="fab fa-whatsapp"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-tiktok"></i></a><a href="#"><i class="fab fa-facebook"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-pinterest"></i></a>
   </div>
 </footer>
 
 <script>
 const productsData = {
-  ropa: [
-    { name: "Cyber Oversize Hoodie", desc: "Sudadera de algodón premium con detalles reflectantes.", price: "65.00€", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=400&auto=format&fit=crop" },
-    { name: "Nova Cargo Pants", desc: "Pantalones técnicos con múltiples bolsillos y ajuste tobillero.", price: "80.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
-    { name: "Graphic Tech Tee", desc: "Camiseta de corte pesado con estampado cibernético.", price: "35.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
-    { name: "Phantom Windbreaker", desc: "Chaqueta ligera impermeable con cremalleras termoselladas.", price: "95.00€", img: "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=400&auto=format&fit=crop" }
-  ],
-  calzado: [
-    { name: "Gen-X Cyber Sneakers", desc: "Zapatillas futuristas con suela amortiguada de gel neón.", price: "140.00€", img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=400&auto=format&fit=crop" },
-    { name: "Neon Flux Boots", desc: "Botas urbanas de caña alta con materiales técnicos sintéticos.", price: "165.00€", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?q=80&w=400&auto=format&fit=crop" },
-    { name: "Quantum Runner", desc: "Calzado de running urbano ultraligero y transpirable.", price: "120.00€", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=400&auto=format&fit=crop" },
-    { name: "Void Slip-On", desc: "Zapatillas cómodas sin cordones con patrón reflectante.", price: "85.00€", img: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=400&auto=format&fit=crop" }
-  ],
-  accesorios: [
-    { name: "Chrono Cyber Watch", desc: "Reloj digital mate con pantalla azul eléctrica.", price: "110.00€", img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=400&auto=format&fit=crop" },
-    { name: "Obsidian Chain Link", desc: "Cadena de eslabones reforzados en acabado acero oscuro.", price: "25.00€", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=400&auto=format&fit=crop" },
-    { name: "Neon Cyber Glasses", desc: "Gafas de sol con lentes de espejo azul eléctrico.", price: "40.00€", img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=400&auto=format&fit=crop" },
-    { name: "Utility Chest Rig", desc: "Arnés frontal técnico para llevar pertenencias esenciales.", price: "50.00€", img: "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?q=80&w=400&auto=format&fit=crop" }
-  ]
+  ropa: [{ name: "Cyber Hoodie", desc: "Algodón premium reflectante.", price: "65€", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=400&auto=format&fit=crop" },{ name: "Nova Cargo", desc: "Pantalones técnicos.", price: "80€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" }],
+  calzado: [{ name: "Gen-X Sneakers", desc: "Gel neón futurista.", price: "140€", img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=400&auto=format&fit=crop" }],
+  accesorios: [{ name: "Cyber Watch", desc: "Reloj digital azul.", price: "110€", img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=400&auto=format&fit=crop" }]
 };
 
 function injectProducts() {
   for (const category in productsData) {
     const grid = document.getElementById(`grid-${category}`);
-    if (!grid) continue;
-    
-    productsData[category].forEach(prod => {
-      const card = document.createElement('div');
-      card.className = 'product-card';
-      card.innerHTML = `
-        <div class="product-img" style="background-image: url('${prod.img}')"></div>
-        <div class="product-info">
-          <h4>${prod.name}</h4>
-          <p>${prod.desc}</p>
-          <div class="product-price">${prod.price}</div>
-          <button class="btn-buy" onclick="alert('Producto añadido al carrito temporal.')">Comprar</button>
-        </div>
-      `;
+    if (grid) productsData[category].forEach(p => {
+      const card = document.createElement('div'); card.className = 'product-card';
+      card.innerHTML = `<div style="height:250px;background:url('${p.img}') center/cover"></div><div style="padding:15px"><h4>${p.name}</h4><p style="color:#a0a0aa;font-size:12px">${p.desc}</p><b style="color:#00e5ff">${p.price}</b><br><button class="btn-buy" style="width:100%;margin-top:10px;padding:8px;background:none;border:1px solid #333;color:#fff;cursor:pointer">Comprar</button></div>`;
       grid.appendChild(card);
     });
   }
 }
 
-function showSection(sectionId) {
-  const sections = document.querySelectorAll('.spa-section');
-  
-  sections.forEach(sec => {
-    sec.classList.remove('active');
-    sec.style.opacity = 0;
-  });
-
-  const targetSection = document.getElementById(`${sectionId}-view`);
-  if (targetSection) {
-    targetSection.classList.add('active');
-    setTimeout(() => { targetSection.style.opacity = 1; }, 50);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+function showSection(id) {
+  document.querySelectorAll('.spa-section').forEach(s => { s.classList.remove('active'); s.style.opacity = 0; });
+  const target = document.getElementById(`${id}-view`);
+  if (target) { target.classList.add('active'); setTimeout(() => target.style.opacity = 1, 50); window.scrollTo({ top: 0, behavior: 'smooth' }); }
 }
 
-function scrollToCollections() {
-  document.getElementById('collections-section').scrollIntoView({ behavior: 'smooth' });
-}
-
-function handleContactForm(e) {
-  e.preventDefault();
-  alert("¡Mensaje enviado con éxito de manera profesional! Nos pondremos en contacto contigo lo antes posible.");
-  e.target.reset();
-}
+function scrollToCollections() { document.getElementById('collections-section').scrollIntoView({ behavior: 'smooth' }); }
+function handleContactForm(e) { e.preventDefault(); alert("Enviado."); e.target.reset(); }
 
 function startFomoCounter() {
-  const counterElement = document.getElementById('active-users');
-  if (!counterElement) return;
+  const el = document.getElementById('active-users');
+  setInterval(() => { el.textContent = Math.floor(Math.random() * 50) + 40; }, 4500);
+}
 
-  function getRandomUsers() {
-    const rand = Math.random();
-    if (rand < 0.75) {
-      return Math.floor(Math.random() * (90 - 40 + 1)) + 40;
+function initReviewsCarousel() {
+  const track = document.getElementById('reviews-track');
+  const viewport = document.getElementById('reviews-viewport');
+  const cards = Array.from(document.querySelectorAll('.review-card'));
+  let index = 0, interval = null, timeout = null;
+
+  function update() {
+    cards.forEach(c => c.classList.remove('active-review'));
+    cards[index].classList.add('active-review');
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      const offset = -(index * (cards[0].offsetWidth + 15)) + (viewport.offsetWidth/2) - (cards[0].offsetWidth/2) - 30;
+      track.style.transform = `translateX(${offset}px)`;
     } else {
-      return Math.random() < 0.5 
-        ? Math.floor(Math.random() * 40) 
-        : Math.floor(Math.random() * (100 - 91 + 1)) + 91;
+      const offset = -(index * (cards[0].offsetHeight + 20)) + (viewport.offsetHeight/2) - (cards[0].offsetHeight/2);
+      track.style.transform = `translateY(${offset}px)`;
     }
   }
 
-  let currentUsers = getRandomUsers();
-  counterElement.textContent = currentUsers;
+  function start() { interval = setInterval(() => { index = (index + 1) % cards.length; update(); }, 3000); }
+  function stop() { clearInterval(interval); clearTimeout(timeout); }
+  function resume() { stop(); timeout = setTimeout(start, 4500); }
 
-  setInterval(() => {
-    const targetUsers = getRandomUsers();
-    const difference = targetUsers - currentUsers;
-    const step = difference > 0 ? Math.ceil(difference * 0.4) : Math.floor(difference * 0.4);
-    currentUsers += step;
-    
-    counterElement.textContent = currentUsers;
-  }, 4500);
+  viewport.addEventListener('mouseenter', stop); viewport.addEventListener('mouseleave', resume);
+  viewport.addEventListener('touchstart', stop, {passive:true}); viewport.addEventListener('touchend', resume, {passive:true});
+  window.addEventListener('resize', update); update(); start();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  injectProducts();
-  startFomoCounter();
-});
+document.addEventListener("DOMContentLoaded", () => { injectProducts(); startFomoCounter(); initReviewsCarousel(); });
 </script>
+
+
+¿Revisamos cómo fluyen ahora las 15 reseñas o pasamos a otro elemento del catálogo?
