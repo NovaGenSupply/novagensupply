@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* CAMBIO 11: Barra de Anuncios (Ticker) acelerada a 15s para mayor dinamismo */
+/* Barra de Anuncios */
 .announcement-ticker {
   background-color: #000000;
   overflow: hidden;
@@ -51,7 +51,7 @@ body {
   100% { transform: translate3d(-33.33%, 0, 0); }
 }
 
-/* Cabecera */
+/* Cabecera Estructural */
 .main-header {
   display: flex;
   justify-content: space-between;
@@ -71,6 +71,7 @@ body {
   letter-spacing: 2px;
   color: var(--text-main);
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .nav-links {
@@ -78,7 +79,12 @@ body {
   align-items: center;
 }
 
-/* CAMBIO 11: Estilos de escritorio base (Muestra texto, oculta iconos de secciones) */
+/* Elementos de Navegación y Dropdowns */
+.nav-item-container {
+  position: relative;
+  display: inline-block;
+}
+
 .nav-links a {
   color: var(--text-muted);
   text-decoration: none;
@@ -92,6 +98,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 10px 0;
 }
 
 .nav-links a:hover {
@@ -99,15 +106,113 @@ body {
   transform: scale(1.05);
 }
 
-/* Ocultar los iconos de navegación en PC */
 .nav-links a i.nav-icon {
   display: none;
 }
 
-/* Forzar que el icono del carrito siempre sea visible */
 .nav-links a.cart-link i {
   display: inline-block !important;
   font-size: 18px;
+}
+
+/* Estilos del Dropdown */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 25px;
+  background-color: #0d0d11;
+  border: 1px solid rgba(0, 229, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 229, 255, 0.05);
+  list-style: none;
+  min-width: 200px;
+  z-index: 200;
+  border-radius: 4px;
+  padding: 8px 0;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 20px;
+  margin: 0;
+  font-size: 12px;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dropdown-menu li a:hover {
+  background-color: rgba(0, 229, 255, 0.08);
+  color: var(--accent-blue);
+  transform: none;
+}
+
+/* Mostrar dropdown al hacer hover en PC */
+@media (min-width: 769px) {
+  .nav-item-container:hover .dropdown-menu {
+    display: block;
+  }
+}
+
+/* Clases auxiliares para móviles vía JS */
+.dropdown-menu.show-mobile {
+  display: block !important;
+}
+
+/* Buscador Cyberpunk Animado */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 25px;
+}
+
+.search-icon-btn {
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 5px;
+}
+
+.search-icon-btn:hover, .search-icon-btn.active {
+  color: var(--accent-blue);
+}
+
+.search-box-wrapper {
+  max-width: 0;
+  overflow: hidden;
+  transition: max-width 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin 0.4s;
+  display: flex;
+  align-items: center;
+}
+
+.search-box-wrapper.open {
+  max-width: 200px;
+  margin-left: 10px;
+}
+
+.search-input {
+  background-color: var(--bg-card);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: var(--text-main);
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 4px;
+  outline: none;
+  width: 180px;
+  transition: border-color 0.3s;
+}
+
+.search-input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
 }
 
 /* Globo indicador del carrito */
@@ -117,7 +222,7 @@ body {
 
 .cart-badge {
   position: absolute;
-  top: -7px;
+  top: -2px;
   right: -9px;
   background-color: var(--accent-blue);
   color: #000000;
@@ -131,6 +236,38 @@ body {
   justify-content: center;
   padding: 2px;
   box-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+}
+
+/* Contenedor de Filtros Internos Rápido */
+.filter-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 35px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-filter {
+  background-color: transparent;
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.btn-filter:hover, .btn-filter.active {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  background-color: rgba(0, 229, 255, 0.05);
 }
 
 /* SPA Logica de visibilidad */
@@ -359,7 +496,7 @@ body {
   color: var(--accent-blue);
 }
 
-/* NUEVOS ESTILOS: Solución Definitiva Carrusel de Opiniones de la Comunidad */
+/* Carrusel de Opiniones */
 .reviews-section {
   max-width: 1100px;
   margin: 80px auto 30px auto;
@@ -368,13 +505,12 @@ body {
 
 .reviews-viewport {
   position: relative;
-  height: 480px; /* Tamaño ideal para contener 3 tarjetas visibles simultáneamente en PC */
+  height: 480px;
   overflow: hidden;
   margin-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Degradados superiores e inferiores para suavizar bordes */
   mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
 }
@@ -386,12 +522,10 @@ body {
   align-items: center;
 }
 
-/* Transición controlada para el desplazamiento fluido */
 .reviews-track.animated {
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Tarjeta base desenfocada y opaca */
 .review-card {
   background-color: var(--bg-card);
   border: 1px solid rgba(255, 255, 255, 0.03);
@@ -408,7 +542,6 @@ body {
   transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
-/* Tarjeta del centro geométrico activa destacada */
 .review-card.active-review {
   opacity: 1 !important;
   filter: blur(0px) !important;
@@ -470,7 +603,7 @@ body {
   text-align: center;
   font-size: 32px;
   letter-spacing: 2px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   text-transform: uppercase;
 }
 
@@ -657,7 +790,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* CAMBIO 11: Media Queries para menú adaptativo e interactividad en smartphones */
+/* Media Queries Adaptativas */
 @media (max-width: 768px) {
   .main-header {
     flex-direction: column;
@@ -668,28 +801,62 @@ body {
   .nav-links {
     width: 100%;
     justify-content: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: 5px;
   }
   
-  /* Ocultar las palabras del menú en móvil */
+  .nav-item-container {
+    position: static;
+  }
+
   .nav-links a .nav-text {
     display: none;
   }
   
-  /* Mostrar únicamente los iconos estilizados */
   .nav-links a i.nav-icon {
     display: inline-block;
   }
 
   .nav-links a {
-    margin-left: 12px;
-    margin-right: 12px;
-    font-size: 20px; /* Tamaño optimizado para interacciones táctiles */
+    margin-left: 8px;
+    margin-right: 8px;
+    font-size: 20px;
   }
   
   .nav-links a:hover {
     transform: scale(1.1);
+  }
+
+  /* Dropdown Adaptado a Móvil */
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #0a0a0c;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    text-align: center;
+  }
+
+  .dropdown-menu li a {
+    text-align: center;
+    font-size: 14px;
+    padding: 12px 20px;
+  }
+
+  .search-container {
+    margin-left: 10px;
+  }
+  
+  .search-box-wrapper.open {
+    max-width: 130px;
+  }
+  
+  .search-input {
+    width: 110px;
   }
 
   /* Secciones e interfaz */
@@ -703,7 +870,7 @@ body {
   .section-title { font-size: 24px; margin-bottom: 25px; }
   .fomo-text { font-size: 11px; text-align: center; }
 
-  /* COMPORTAMIENTO MÓVIL DEL CARRUSEL: Horizontal y adaptado */
+  /* Carrusel en Móvil */
   .reviews-viewport {
     height: 180px;
     mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent);
@@ -740,21 +907,60 @@ body {
 <header class="main-header">
   <div class="logo" onclick="showSection('home')">NovaGen Supply</div>
   <nav class="nav-links">
-    <a href="#" onclick="showSection('home')" title="Inicio">
-      <i class="fa-solid fa-house nav-icon"></i><span class="nav-text">Inicio</span>
-    </a>
-    <a href="#" onclick="showSection('ropa')" title="Ropa">
-      <i class="fa-solid fa-shirt nav-icon"></i><span class="nav-text">Ropa</span>
-    </a>
-    <a href="#" onclick="showSection('calzado')" title="Calzado">
-      <i class="fa-solid fa-shoe-prints nav-icon"></i><span class="nav-text">Calzado</span>
-    </a>
-    <a href="#" onclick="showSection('accesorios')" title="Accesorios">
-      <i class="fa-solid fa-gem nav-icon"></i><span class="nav-text">Accesorios</span>
-    </a>
-    <a href="#" onclick="showSection('contacto')" title="Contacto">
-      <i class="fa-solid fa-envelope nav-icon"></i><span class="nav-text">Contacto</span>
-    </a>
+    
+    <div class="nav-item-container">
+      <a href="#" onclick="handleNavClick(event, 'ropa')" title="Ropa">
+        <i class="fa-solid fa-shirt nav-icon"></i><span class="nav-text">Ropa</span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="#" onclick="handleDropdownFilter(event, 'ropa', 'Camisetas')">Camisetas</a></li>
+        <li><a href="#" onclick="handleDropdownFilter(event, 'ropa', 'Conjuntos')">Conjuntos</a></li>
+        <li><a href="#" onclick="handleDropdownFilter(event, 'ropa', 'Pantalones')">Pantalones</a></li>
+        <li><a href="#" onclick="handleDropdownFilter(event, 'ropa', 'Abrigos')">Abrigos</a></li>
+        <li><a href="#" onclick="handleDropdownFilter(event, 'ropa', 'Chaquetas')">Chaquetas</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-item-container">
+      <a href="#" onclick="handleNavClick(event, 'calzado')" title="Calzado">
+        <i class="fa-solid fa-shoe-prints nav-icon"></i><span class="nav-text">Calzado</span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="#" onclick="handleDropdownFilter(event, 'calzado', 'Zapatillas')">Zapatillas</a></li>
+        <li><a href="#" onclick="handleDropdownFilter(event, 'calzado', 'Chanclas')">Chanclas</a></li>
+        <li><a href="#" onclick="handleDropdownFilter(event, 'calzado', 'Botas')">Botas</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-item-container">
+      <a href="#" onclick="handleNavClick(event, 'accesorios')" title="Accesorios">
+        <i class="fa-solid fa-gem nav-icon"></i><span class="nav-text">Accesorios</span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="#" onclick="handleDropdownFilter(event, 'accesorios', 'Relojes')">Relojes</a></li>
+        <li><a href="#" onclick="handleDropdownFilter(event, 'accesorios', 'Cinturones')">Cinturones</a></li>
+        <li><a href="#" onclick="handleDropdownFilter(event, 'accesorios', 'Gorras')">Gorras</a></li>
+        <li><a href="#" onclick="handleDropdownFilter(event, 'accesorios', 'Joyería y Bisutería')">Joyería y Bisutería</a></li>
+        <li><a href="#" onclick="handleDropdownFilter(event, 'accesorios', 'Bolsos, Mochilas y Riñoneras')">Bolsos y Mochilas</a></li>
+        <li><a href="#" onclick="handleDropdownFilter(event, 'accesorios', 'gafas de sol')">Gafas de Sol</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-item-container">
+      <a href="#" onclick="showSection('contacto')" title="Contacto">
+        <i class="fa-solid fa-envelope nav-icon"></i><span class="nav-text">Contacto</span>
+      </a>
+    </div>
+
+    <div class="search-container">
+      <button class="search-icon-btn" onclick="toggleSearchBox()" title="Buscar productos">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <div class="search-box-wrapper" id="search-box-wrapper">
+        <input type="text" class="search-input" id="search-input" placeholder="Buscar en esta sección..." oninput="handleSearchQuery(this.value)">
+      </div>
+    </div>
+
     <a href="#" class="cart-link" onclick="showSection('carrito')" title="Carrito de Compras">
       <i class="fa-solid fa-shopping-cart"></i>
       <span class="cart-badge">0</span>
@@ -880,41 +1086,6 @@ body {
               <p class="review-text">"El cordón de plata es una pasada. Ni la acetona le cambia el color. 10/10."</p>
             </div>
           </div>
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@dani_el_rebelde</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"En la riñonera LV te cabe de todoouu jejeje ⬜."</p>
-            </div>
-          </div>
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@sheiliita_love</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"La gorra Balenciaga clásica flipas cómo queda. El ajuste de atrás va perfecto."</p>
-            </div>
-          </div>
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@maikol_flow_</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"Gafas de sol de calidad. Los cristales polarizados se notan una barbaridad cuando pega el sol de frente. Muy top."</p>
-            </div>
-          </div>
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@joseba_antifaka</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"La cartera Supreme la llevas en los bolsillos del Tech y ni te enteras 💵."</p>
-            </div>
-          </div>
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@tami_la_gitanilla</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"El cinturón LV con las Dior B22 es cine ✋🫠🤚."</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -922,6 +1093,7 @@ body {
 
   <section id="ropa-view" class="spa-section">
     <h2 class="section-title">Colección Ropa</h2>
+    <div class="filter-row" id="filters-ropa"></div>
     <div class="products-grid" id="grid-ropa"></div>
     <div class="btn-back-container">
       <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
@@ -930,6 +1102,7 @@ body {
 
   <section id="calzado-view" class="spa-section">
     <h2 class="section-title">Colección Calzado</h2>
+    <div class="filter-row" id="filters-calzado"></div>
     <div class="products-grid" id="grid-calzado"></div>
     <div class="btn-back-container">
       <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
@@ -938,6 +1111,7 @@ body {
 
   <section id="accesorios-view" class="spa-section">
     <h2 class="section-title">Colección Accesorios</h2>
+    <div class="filter-row" id="filters-accesorios"></div>
     <div class="products-grid" id="grid-accesorios"></div>
     <div class="btn-back-container">
       <button class="btn-primary" onclick="showSection('home')">Volver al inicio</button>
@@ -1020,33 +1194,68 @@ body {
 </footer>
 
 <script>
+// Estado de control global de la sección activa y filtros aplicados
+let currentActiveView = 'home';
+let currentActiveFilter = 'todos';
+
+// Estructura de productos optimizada con la clave 'subcategory'
 const productsData = {
   ropa: [
-    { name: "Cyber Oversize Hoodie", desc: "Sudadera de algodón premium con detalles reflectantes.", price: "65.00€", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=400&auto=format&fit=crop" },
-    { name: "Nova Cargo Pants", desc: "Pantalones técnicos con múltiples bolsillos y ajuste tobillero.", price: "80.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
-    { name: "Graphic Tech Tee", desc: "Camiseta de corte pesado con estampado cibernético.", price: "35.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
-    { name: "Phantom Windbreaker", desc: "Chaqueta ligera impermeable con cremalleras termoselladas.", price: "95.00€", img: "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=400&auto=format&fit=crop" }
+    { name: "Cyber Oversize Hoodie", subcategory: "Chaquetas", desc: "Sudadera de algodón premium con detalles reflectantes.", price: "65.00€", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=400&auto=format&fit=crop" },
+    { name: "Nova Cargo Pants", subcategory: "Pantalones", desc: "Pantalones técnicos con múltiples bolsillos y ajuste tobillero.", price: "80.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
+    { name: "Graphic Tech Tee", subcategory: "Camisetas", desc: "Camiseta de corte pesado con estampado cibernético.", price: "35.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
+    { name: "Phantom Windbreaker", subcategory: "Abrigos", desc: "Chaqueta ligera impermeable con cremalleras termoselladas.", price: "95.00€", img: "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=400&auto=format&fit=crop" }
   ],
   calzado: [
-    { name: "Gen-X Cyber Sneakers", desc: "Zapatillas futuristas con suela amortiguada de gel neón.", price: "140.00€", img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=400&auto=format&fit=crop" },
-    { name: "Neon Flux Boots", desc: "Botas urbanas de caña alta con materiales técnicos sintéticos.", price: "165.00€", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?q=80&w=400&auto=format&fit=crop" },
-    { name: "Quantum Runner", desc: "Calzado de running urbano ultraligero y transpirable.", price: "120.00€", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=400&auto=format&fit=crop" },
-    { name: "Void Slip-On", desc: "Zapatillas cómodas sin cordones con patrón reflectante.", price: "85.00€", img: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=400&auto=format&fit=crop" }
+    { name: "Gen-X Cyber Sneakers", subcategory: "Zapatillas", desc: "Zapatillas futuristas con suela amortiguada de gel neón.", price: "140.00€", img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=400&auto=format&fit=crop" },
+    { name: "Neon Flux Boots", subcategory: "Botas", desc: "Botas urbanas de caña alta con materiales técnicos sintéticos.", price: "165.00€", img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?q=80&w=400&auto=format&fit=crop" },
+    { name: "Quantum Runner", subcategory: "Zapatillas", desc: "Calzado de running urbano ultraligero y transpirable.", price: "120.00€", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=400&auto=format&fit=crop" },
+    { name: "Void Slip-On", subcategory: "Chanclas", desc: "Zapatillas cómodas sin cordones con patrón reflectante.", price: "85.00€", img: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=400&auto=format&fit=crop" }
   ],
   accesorios: [
-    { name: "Chrono Cyber Watch", desc: "Reloj digital mate con pantalla azul eléctrica.", price: "110.00€", img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=400&auto=format&fit=crop" },
-    { name: "Obsidian Chain Link", desc: "Cadena de eslabones reforzados en acabado acero oscuro.", price: "25.00€", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=400&auto=format&fit=crop" },
-    { name: "Neon Cyber Glasses", desc: "Gafas de sol con lentes de espejo azul eléctrico.", price: "40.00€", img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=400&auto=format&fit=crop" },
-    { name: "Utility Chest Rig", desc: "Arnés frontal técnico para llevar pertenencias esenciales.", price: "50.00€", img: "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?q=80&w=400&auto=format&fit=crop" }
+    { name: "Chrono Cyber Watch", subcategory: "Relojes", desc: "Reloj digital mate con pantalla azul eléctrica.", price: "110.00€", img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=400&auto=format&fit=crop" },
+    { name: "Obsidian Chain Link", subcategory: "Joyería y Bisutería", desc: "Cadena de eslabones reforzados en acabado acero oscuro.", price: "25.00€", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=400&auto=format&fit=crop" },
+    { name: "Neon Cyber Glasses", subcategory: "gafas de sol", desc: "Gafas de sol con lentes de espejo azul eléctrico.", price: "40.00€", img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=400&auto=format&fit=crop" },
+    { name: "Utility Chest Rig", subcategory: "Bolsos, Mochilas y Riñoneras", desc: "Arnés frontal técnico para llevar pertenencias esenciales.", price: "50.00€", img: "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?q=80&w=400&auto=format&fit=crop" }
   ]
 };
 
+// Mapa dinámico de subcategorías vinculadas a los dropdowns y botones
+const subcategoriesMap = {
+  ropa: ["Camisetas", "Conjuntos", "Pantalones", "Abrigos", "Chaquetas"],
+  calzado: ["Zapatillas", "Chanclas", "Botas"],
+  accesorios: ["Relojes", "Cinturones", "Gorras", "Joyería y Bisutería", "Bolsos, Mochilas y Riñoneras", "gafas de sol"]
+};
+
+// Motor de inyección estructural de catálogos con soporte para filtros por texto y subcategoría
 function injectProducts() {
+  const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+
   for (const category in productsData) {
     const grid = document.getElementById(`grid-${category}`);
     if (!grid) continue;
+    grid.innerHTML = '';
     
-    productsData[category].forEach(prod => {
+    // Filtrado lógico secuencial
+    let filteredList = productsData[category];
+
+    if (currentActiveView === category && currentActiveFilter !== 'todos') {
+      filteredList = filteredList.filter(p => p.subcategory.toLowerCase() === currentActiveFilter.toLowerCase());
+    }
+
+    if (searchQuery !== '' && currentActiveView === category) {
+      filteredList = filteredList.filter(p => 
+        p.name.toLowerCase().includes(searchQuery) || 
+        p.desc.toLowerCase().includes(searchQuery)
+      );
+    }
+
+    if (filteredList.length === 0) {
+      grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px 0;">No se encontraron artículos con los criterios seleccionados.</div>`;
+      continue;
+    }
+
+    filteredList.forEach(prod => {
       const card = document.createElement('div');
       card.className = 'product-card';
       card.innerHTML = `
@@ -1063,9 +1272,81 @@ function injectProducts() {
   }
 }
 
-function showSection(sectionId) {
-  const sections = document.querySelectorAll('.spa-section');
+// Genera e inyecta dinámicamente las barras de filtros internos superiores
+function injectFilterRows() {
+  for (const category in subcategoriesMap) {
+    const container = document.getElementById(`filters-${category}`);
+    if (!container) continue;
+    container.innerHTML = '';
+
+    // Botón inicial "Todos"
+    const btnAll = document.createElement('button');
+    btnAll.className = `btn-filter ${currentActiveFilter === 'todos' ? 'active' : ''}`;
+    btnAll.textContent = 'Ver todo';
+    btnAll.onclick = () => filterCategoryInternal(category, 'todos');
+    container.appendChild(btnAll);
+
+    // Botones específicos de subcategorías
+    subcategoriesMap[category].forEach(sub => {
+      const btn = document.createElement('button');
+      btn.className = `btn-filter ${currentActiveFilter.toLowerCase() === sub.toLowerCase() ? 'active' : ''}`;
+      btn.textContent = sub;
+      btn.onclick = () => filterCategoryInternal(category, sub);
+      container.appendChild(btn);
+    });
+  }
+}
+
+// Filtra internamente la categoría
+function filterCategoryInternal(category, subcategory) {
+  currentActiveFilter = subcategory;
+  injectFilterRows();
+  injectProducts();
+}
+
+// Maneja la redirección desde las opciones de los menús desplegables superiores
+function handleDropdownFilter(e, category, subcategory) {
+  e.preventDefault();
+  e.stopPropagation();
   
+  // Limpieza de estados flotantes móviles
+  document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show-mobile'));
+  
+  showSection(category);
+  filterCategoryInternal(category, subcategory);
+}
+
+// Control táctil alternativo para el menú principal en dispositivos móviles
+function handleNavClick(e, category) {
+  if (window.innerWidth <= 768) {
+    e.preventDefault();
+    e.stopPropagation();
+    const parent = e.target.closest('.nav-item-container');
+    const targetMenu = parent.querySelector('.dropdown-menu');
+    
+    const wasOpen = targetMenu.classList.contains('show-mobile');
+    document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show-mobile'));
+    
+    if (!wasOpen) {
+      targetMenu.classList.add('show-mobile');
+    } else {
+      showSection(category);
+    }
+  } else {
+    showSection(category);
+  }
+}
+
+// Modificación controlada del controlador SPA base
+function showSection(sectionId) {
+  currentActiveView = sectionId;
+  currentActiveFilter = 'todos'; // Restablece filtros al cambiar de sección
+  
+  // Limpieza del cuadro de búsqueda en cambios de sección
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) searchInput.value = '';
+
+  const sections = document.querySelectorAll('.spa-section');
   sections.forEach(sec => {
     sec.classList.remove('active');
     sec.style.opacity = 0;
@@ -1077,6 +1358,48 @@ function showSection(sectionId) {
     setTimeout(() => { targetSection.style.opacity = 1; }, 50);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  if (['ropa', 'calzado', 'accesorios'].includes(sectionId)) {
+    injectFilterRows();
+    injectProducts();
+  }
+}
+
+// Cierra menús contextuales en clics fuera de su área en móvil
+document.addEventListener('click', () => {
+  document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show-mobile'));
+});
+
+// Lógica de apertura/cierre de la barra de búsqueda animada
+function toggleSearchBox() {
+  const wrapper = document.getElementById('search-box-wrapper');
+  const btn = document.querySelector('.search-icon-btn');
+  const input = document.getElementById('search-input');
+  
+  if (wrapper.classList.contains('open')) {
+    wrapper.classList.remove('open');
+    btn.classList.remove('active');
+    input.value = '';
+    injectProducts();
+  } else {
+    wrapper.classList.add('open');
+    btn.classList.add('active');
+    input.focus();
+  }
+}
+
+// Maneja la consulta de búsqueda en tiempo real
+function handleSearchQuery(value) {
+  if (!['ropa', 'calzado', 'accesorios'].includes(currentActiveView)) {
+    // Si el usuario busca estando en el Home, Contacto o FAQ, se le redirige automáticamente a Ropa
+    showSection('ropa');
+    document.getElementById('search-input').value = value;
+    const wrapper = document.getElementById('search-box-wrapper');
+    const btn = document.querySelector('.search-icon-btn');
+    wrapper.classList.add('open');
+    btn.classList.add('active');
+  }
+  injectProducts();
 }
 
 function scrollToCollections() {
@@ -1117,7 +1440,7 @@ function startFomoCounter() {
   }, 4500);
 }
 
-// INICIALIZACIÓN Y MOTOR DEL CARRUSEL (RULETA INFINITA + ENFOQUE GEOMÉTRICO CENTRAL)
+// Motor del Carrusel de Opiniones
 function initReviewsCarousel() {
   const track = document.getElementById('reviews-track');
   const viewport = document.getElementById('reviews-viewport');
@@ -1126,7 +1449,6 @@ function initReviewsCarousel() {
   const originalCards = Array.from(track.querySelectorAll('.review-card'));
   const originalCount = originalCards.length;
 
-  // 1. Clonación de bloques espejo (antes y después) para permitir el bucle infinito sin saltos visuales
   originalCards.forEach(card => {
     const cloneBefore = card.cloneNode(true);
     const cloneAfter = card.cloneNode(true);
@@ -1137,7 +1459,6 @@ function initReviewsCarousel() {
   let currentIndex = originalCount; 
   let isTransitioning = false;
 
-  // Extrae de forma dinámica las dimensiones y márgenes de la interfaz según el dispositivo
   function getLayoutMetrics() {
     const sample = track.querySelector('.review-card');
     const isMobile = window.innerWidth <= 768;
@@ -1148,12 +1469,10 @@ function initReviewsCarousel() {
     };
   }
 
-  // 2. Función de Enfoque Geométrico Central Exacto (Calculado dinámicamente mediante getBoundingClientRect)
   function highlightCenterCard() {
     const viewRect = viewport.getBoundingClientRect();
     const metrics = getLayoutMetrics();
     
-    // Encuentra el centro del contenedor padre
     const viewCenter = metrics.isMobile 
       ? viewRect.left + viewRect.width / 2 
       : viewRect.top + viewRect.height / 2;
@@ -1164,7 +1483,6 @@ function initReviewsCarousel() {
 
     allCards.forEach(card => {
       const cardRect = card.getBoundingClientRect();
-      // Encuentra el centro de la tarjeta evaluada
       const cardCenter = metrics.isMobile
         ? cardRect.left + cardRect.width / 2
         : cardRect.top + cardRect.height / 2;
@@ -1178,13 +1496,11 @@ function initReviewsCarousel() {
       }
     });
 
-    // Remueve filtros y escala la tarjeta ganadora en el centro exacto
     if (closestCard) {
       closestCard.classList.add('active-review');
     }
   }
 
-  // Desplaza el track a la posición calculada
   function move(animate = true) {
     const metrics = getLayoutMetrics();
     const totalStep = metrics.cardSize + metrics.gap;
@@ -1203,7 +1519,6 @@ function initReviewsCarousel() {
       track.style.transform = `translateY(${offset}px)`;
     }
 
-    // Calcula el foco central tras ajustarse el desplazamiento
     if (animate) {
       setTimeout(highlightCenterCard, 100);
     } else {
@@ -1211,10 +1526,8 @@ function initReviewsCarousel() {
     }
   }
 
-  // 3. Control de límites (Salto invisible instantáneo al alcanzar los extremos clonados)
   track.addEventListener('transitionend', () => {
     isTransitioning = false;
-    
     if (currentIndex >= originalCount * 2) {
       currentIndex = originalCount;
       move(false);
@@ -1224,7 +1537,6 @@ function initReviewsCarousel() {
     }
   });
 
-  // 4. Temporizador de ejecución continua ininterrumpida 24/7 (Sin pausas por interacción)
   function startAutoCycle() {
     setInterval(() => {
       if (isTransitioning) return;
@@ -1234,10 +1546,8 @@ function initReviewsCarousel() {
     }, 3000);
   }
 
-  // Recalcula posiciones si se rota o cambia el tamaño de la ventana
   window.addEventListener('resize', () => move(false));
 
-  // Arranque inicial coordinado
   setTimeout(() => {
     move(false);
     startAutoCycle();
@@ -1247,6 +1557,6 @@ function initReviewsCarousel() {
 document.addEventListener("DOMContentLoaded", () => {
   injectProducts();
   startFomoCounter();
-  initReviewsCarousel(); // Llama a la inicialización del carrusel corregido
+  initReviewsCarousel();
 });
 </script>
