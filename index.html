@@ -284,6 +284,16 @@ body {
   opacity: 1;
 }
 
+/* Animación FadeIn para Cuadrícula */
+.products-grid.fade-in {
+  animation: fadeIn 0.4s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* Hero */
 .hero {
   text-align: center;
@@ -307,7 +317,7 @@ body {
   margin-bottom: 35px;
 }
 
-/* Contador FOMO con Eco Visual */
+/* Contador FOMO */
 .fomo-counter {
   display: flex;
   align-items: center;
@@ -391,7 +401,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* Contenedor para Estado de Carrito Vacío */
+/* Contenedor Carrito Vacío */
 .empty-cart-container {
   text-align: center;
   padding: 60px 20px;
@@ -494,108 +504,6 @@ body {
 .collection-card:hover .btn-card {
   border-color: var(--accent-blue);
   color: var(--accent-blue);
-}
-
-/* Carrusel de Opiniones */
-.reviews-section {
-  max-width: 1100px;
-  margin: 80px auto 30px auto;
-  padding: 0 20px;
-}
-
-.reviews-viewport {
-  position: relative;
-  height: 480px;
-  overflow: hidden;
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
-}
-
-.reviews-track {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  align-items: center;
-}
-
-.reviews-track.animated {
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.review-card {
-  background-color: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  padding: 24px;
-  border-radius: 8px;
-  width: 600px;
-  min-height: 125px;
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  opacity: 0.25;
-  filter: blur(4px);
-  transform: scale(0.9);
-  transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
-}
-
-.review-card.active-review {
-  opacity: 1 !important;
-  filter: blur(0px) !important;
-  transform: scale(1.05) !important;
-  border-color: var(--accent-blue) !important;
-  box-shadow: 0 0 30px rgba(0, 229, 255, 0.25) !important;
-}
-
-.review-avatar {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  background-color: #18181b;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.review-avatar i {
-  color: #52525b;
-  font-size: 22px;
-}
-
-.review-content {
-  flex-grow: 1;
-}
-
-.review-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
-}
-
-.review-user {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--accent-blue);
-}
-
-.review-stars {
-  color: #ffca28;
-  font-size: 11px;
-  display: flex;
-  gap: 2px;
-}
-
-.review-text {
-  color: var(--text-main);
-  font-size: 14px;
-  line-height: 1.5;
-  font-weight: 500;
 }
 
 /* Catálogos de Productos */
@@ -869,30 +777,6 @@ body {
   .products-grid { grid-template-columns: 1fr; gap: 20px; padding: 0 10px; }
   .section-title { font-size: 24px; margin-bottom: 25px; }
   .fomo-text { font-size: 11px; text-align: center; }
-
-  /* Carrusel en Móvil */
-  .reviews-viewport {
-    height: 180px;
-    mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent);
-  }
-  
-  .reviews-track {
-    flex-direction: row;
-    gap: 15px;
-    align-items: center;
-  }
-  
-  .review-card {
-    width: 290px;
-    min-width: 290px;
-    min-height: 115px;
-    padding: 16px;
-  }
-  
-  .review-text {
-    font-size: 12px;
-  }
 }
 </style>
 
@@ -908,6 +792,7 @@ body {
   <div class="logo" onclick="showSection('home')">NovaGen Supply</div>
   <nav class="nav-links">
     
+    <!-- Ropa con Dropdown -->
     <div class="nav-item-container">
       <a href="#" onclick="handleNavClick(event, 'ropa')" title="Ropa">
         <i class="fa-solid fa-shirt nav-icon"></i><span class="nav-text">Ropa</span>
@@ -921,6 +806,7 @@ body {
       </ul>
     </div>
 
+    <!-- Calzado con Dropdown -->
     <div class="nav-item-container">
       <a href="#" onclick="handleNavClick(event, 'calzado')" title="Calzado">
         <i class="fa-solid fa-shoe-prints nav-icon"></i><span class="nav-text">Calzado</span>
@@ -932,6 +818,7 @@ body {
       </ul>
     </div>
 
+    <!-- Accesorios con Dropdown -->
     <div class="nav-item-container">
       <a href="#" onclick="handleNavClick(event, 'accesorios')" title="Accesorios">
         <i class="fa-solid fa-gem nav-icon"></i><span class="nav-text">Accesorios</span>
@@ -952,6 +839,7 @@ body {
       </a>
     </div>
 
+    <!-- Buscador Integrado -->
     <div class="search-container">
       <button class="search-icon-btn" onclick="toggleSearchBox()" title="Buscar productos">
         <i class="fa-solid fa-magnifying-glass"></i>
@@ -1011,84 +899,6 @@ body {
         </div>
       </div>
     </div>
-
-    <section class="reviews-section">
-      <h2 class="section-title">Opiniones de la Comunidad</h2>
-      <div class="reviews-viewport" id="reviews-viewport">
-        <div class="reviews-track animated" id="reviews-track">
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@kevin_bcn_99</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"Pillé unas New Balance 9060 y pal precio que están van increíbles. La verdad 100% recomendables."</p>
-            </div>
-          </div>
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@jona.leg</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"Me llegó ayer la sudadera Supreme Box Logo en negro. El algodón es gordito del bueno y se nota la calidad."</p>
-            </div>
-          </div>
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@laa_jessii.05</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"Loocuuura las Shox TL rosass."</p>
-            </div>
-          </div>
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@richy_mdlr</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"Estrenando hoy las Adidas Campus 00s y quedan malladas con cualquier pantalón oversize. Compra de 💯."</p>
-            </div>
-          </div>
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@cristian_vlc_</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"Menuda chaqueta la Nike Tech Fleece 😰."</p>
-            </div>
-          </div>
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@brayan._.autentikk</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"Buscaba una cadena de plata y ni una defrauda. Pesa lo suyo y brilla mazo ✨."</p>
-            </div>
-          </div>
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@soraayaa_09</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"El colgante de oro con la cruz me llegó súper bien. El tamaño es ideal, ni muy grande ni muy fino. Queda precioso puesto."</p>
-            </div>
-          </div>
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@yasin_2r</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"Pedazo de reloj el RM 🙏. Calidad de la buena."</p>
-            </div>
-          </div>
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@yeni_vallecas</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"Me compré unos pendientes de oro 18k y son perfectos para el día a día. Súper elegantes y no pesan nada."</p>
-            </div>
-          </div>
-          <div class="review-card">
-            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="review-content">
-              <div class="review-header"><span class="review-user">@samu_tk_</span><div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div>
-              <p class="review-text">"El cordón de plata es una pasada. Ni la acetona le cambia el color. 10/10."</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </section>
 
   <section id="ropa-view" class="spa-section">
@@ -1118,21 +928,22 @@ body {
     </div>
   </section>
 
+  <!-- FORMULARIO DE CONTACTO CON CONEXIÓN REAL (Formspree) -->
   <section id="contacto-view" class="spa-section">
     <div class="contact-container">
       <h2>Contacto</h2>
-      <form id="contact-form" onsubmit="handleContactForm(event)">
+      <form id="contact-form" action="https://formspree.io/f/xgavvwyg" method="POST">
         <div class="form-group">
           <label>Tu Nombre</label>
-          <input type="text" required placeholder="Tu Nombre">
+          <input type="text" name="name" required placeholder="Tu Nombre">
         </div>
         <div class="form-group">
           <label>Correo electrónico</label>
-          <input type="email" required placeholder="ejemplo@correo.com">
+          <input type="email" name="email" required placeholder="ejemplo@correo.com">
         </div>
         <div class="form-group">
           <label>¿En qué podemos ayudarte?</label>
-          <textarea required rows="5" placeholder="Escribe aquí tu consulta sobre pedidos, tallas, colaboraciones..."></textarea>
+          <textarea name="message" required rows="5" placeholder="Escribe aquí tu consulta sobre pedidos, tallas, colaboraciones..."></textarea>
         </div>
         <button type="submit" class="btn-primary">Enviar Mensaje</button>
       </form>
@@ -1194,11 +1005,10 @@ body {
 </footer>
 
 <script>
-// Estado de control global de la sección activa y filtros aplicados
 let currentActiveView = 'home';
 let currentActiveFilter = 'todos';
 
-// Estructura de productos optimizada con la clave 'subcategory'
+// BASE DE DATOS DE PRODUCTOS CON RUTAS DE IMÁGENES (img: "...")
 const productsData = {
   ropa: [
     { name: "Cyber Oversize Hoodie", subcategory: "Chaquetas", desc: "Sudadera de algodón premium con detalles reflectantes.", price: "65.00€", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=400&auto=format&fit=crop" },
@@ -1220,14 +1030,13 @@ const productsData = {
   ]
 };
 
-// Mapa dinámico de subcategorías vinculadas a los dropdowns y botones
 const subcategoriesMap = {
   ropa: ["Camisetas", "Conjuntos", "Pantalones", "Abrigos", "Chaquetas"],
   calzado: ["Zapatillas", "Chanclas", "Botas"],
   accesorios: ["Relojes", "Cinturones", "Gorras", "Joyería y Bisutería", "Bolsos, Mochilas y Riñoneras", "gafas de sol"]
 };
 
-// Motor de inyección estructural de catálogos con soporte para filtros por texto y subcategoría
+// Motor de inyección de productos
 function injectProducts() {
   const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
 
@@ -1236,7 +1045,10 @@ function injectProducts() {
     if (!grid) continue;
     grid.innerHTML = '';
     
-    // Filtrado lógico secuencial
+    grid.classList.remove('fade-in');
+    void grid.offsetWidth; 
+    grid.classList.add('fade-in');
+    
     let filteredList = productsData[category];
 
     if (currentActiveView === category && currentActiveFilter !== 'todos') {
@@ -1272,21 +1084,18 @@ function injectProducts() {
   }
 }
 
-// Genera e inyecta dinámicamente las barras de filtros internos superiores
 function injectFilterRows() {
   for (const category in subcategoriesMap) {
     const container = document.getElementById(`filters-${category}`);
     if (!container) continue;
     container.innerHTML = '';
 
-    // Botón inicial "Todos"
     const btnAll = document.createElement('button');
     btnAll.className = `btn-filter ${currentActiveFilter === 'todos' ? 'active' : ''}`;
     btnAll.textContent = 'Ver todo';
     btnAll.onclick = () => filterCategoryInternal(category, 'todos');
     container.appendChild(btnAll);
 
-    // Botones específicos de subcategorías
     subcategoriesMap[category].forEach(sub => {
       const btn = document.createElement('button');
       btn.className = `btn-filter ${currentActiveFilter.toLowerCase() === sub.toLowerCase() ? 'active' : ''}`;
@@ -1297,52 +1106,45 @@ function injectFilterRows() {
   }
 }
 
-// Filtra internamente la categoría
 function filterCategoryInternal(category, subcategory) {
   currentActiveFilter = subcategory;
   injectFilterRows();
   injectProducts();
 }
 
-// Maneja la redirección desde las opciones de los menús desplegables superiores
 function handleDropdownFilter(e, category, subcategory) {
   e.preventDefault();
   e.stopPropagation();
   
-  // Limpieza de estados flotantes móviles
   document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show-mobile'));
   
   showSection(category);
   filterCategoryInternal(category, subcategory);
 }
 
-// Control táctil alternativo para el menú principal en dispositivos móviles
 function handleNavClick(e, category) {
   if (window.innerWidth <= 768) {
     e.preventDefault();
     e.stopPropagation();
+    
     const parent = e.target.closest('.nav-item-container');
     const targetMenu = parent.querySelector('.dropdown-menu');
-    
     const wasOpen = targetMenu.classList.contains('show-mobile');
+    
     document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show-mobile'));
     
     if (!wasOpen) {
       targetMenu.classList.add('show-mobile');
-    } else {
-      showSection(category);
     }
   } else {
     showSection(category);
   }
 }
 
-// Modificación controlada del controlador SPA base
 function showSection(sectionId) {
   currentActiveView = sectionId;
-  currentActiveFilter = 'todos'; // Restablece filtros al cambiar de sección
+  currentActiveFilter = 'todos'; 
   
-  // Limpieza del cuadro de búsqueda en cambios de sección
   const searchInput = document.getElementById('search-input');
   if (searchInput) searchInput.value = '';
 
@@ -1365,12 +1167,10 @@ function showSection(sectionId) {
   }
 }
 
-// Cierra menús contextuales en clics fuera de su área en móvil
 document.addEventListener('click', () => {
   document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show-mobile'));
 });
 
-// Lógica de apertura/cierre de la barra de búsqueda animada
 function toggleSearchBox() {
   const wrapper = document.getElementById('search-box-wrapper');
   const btn = document.querySelector('.search-icon-btn');
@@ -1388,10 +1188,8 @@ function toggleSearchBox() {
   }
 }
 
-// Maneja la consulta de búsqueda en tiempo real
 function handleSearchQuery(value) {
   if (!['ropa', 'calzado', 'accesorios'].includes(currentActiveView)) {
-    // Si el usuario busca estando en el Home, Contacto o FAQ, se le redirige automáticamente a Ropa
     showSection('ropa');
     document.getElementById('search-input').value = value;
     const wrapper = document.getElementById('search-box-wrapper');
@@ -1404,12 +1202,6 @@ function handleSearchQuery(value) {
 
 function scrollToCollections() {
   document.getElementById('collections-section').scrollIntoView({ behavior: 'smooth' });
-}
-
-function handleContactForm(e) {
-  e.preventDefault();
-  alert("¡Mensaje enviado con éxito de manera profesional! Nos pondremos en contacto contigo lo antes posible.");
-  e.target.reset();
 }
 
 function startFomoCounter() {
@@ -1440,123 +1232,8 @@ function startFomoCounter() {
   }, 4500);
 }
 
-// Motor del Carrusel de Opiniones
-function initReviewsCarousel() {
-  const track = document.getElementById('reviews-track');
-  const viewport = document.getElementById('reviews-viewport');
-  if (!track || !viewport) return;
-
-  const originalCards = Array.from(track.querySelectorAll('.review-card'));
-  const originalCount = originalCards.length;
-
-  originalCards.forEach(card => {
-    const cloneBefore = card.cloneNode(true);
-    const cloneAfter = card.cloneNode(true);
-    track.appendChild(cloneAfter);
-    track.insertBefore(cloneBefore, track.firstChild);
-  });
-
-  let currentIndex = originalCount; 
-  let isTransitioning = false;
-
-  function getLayoutMetrics() {
-    const sample = track.querySelector('.review-card');
-    const isMobile = window.innerWidth <= 768;
-    return {
-      isMobile: isMobile,
-      cardSize: isMobile ? sample.offsetWidth : sample.offsetHeight,
-      gap: isMobile ? 15 : 25
-    };
-  }
-
-  function highlightCenterCard() {
-    const viewRect = viewport.getBoundingClientRect();
-    const metrics = getLayoutMetrics();
-    
-    const viewCenter = metrics.isMobile 
-      ? viewRect.left + viewRect.width / 2 
-      : viewRect.top + viewRect.height / 2;
-
-    const allCards = track.querySelectorAll('.review-card');
-    let closestCard = null;
-    let minDistance = Infinity;
-
-    allCards.forEach(card => {
-      const cardRect = card.getBoundingClientRect();
-      const cardCenter = metrics.isMobile
-        ? cardRect.left + cardRect.width / 2
-        : cardRect.top + cardRect.height / 2;
-
-      const distance = Math.abs(cardCenter - viewCenter);
-      card.classList.remove('active-review');
-
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestCard = card;
-      }
-    });
-
-    if (closestCard) {
-      closestCard.classList.add('active-review');
-    }
-  }
-
-  function move(animate = true) {
-    const metrics = getLayoutMetrics();
-    const totalStep = metrics.cardSize + metrics.gap;
-
-    if (animate) {
-      track.classList.add('animated');
-    } else {
-      track.classList.remove('animated');
-    }
-
-    if (metrics.isMobile) {
-      const offset = -(currentIndex * totalStep) + (viewport.offsetWidth / 2) - (metrics.cardSize / 2);
-      track.style.transform = `translateX(${offset}px)`;
-    } else {
-      const offset = -(currentIndex * totalStep) + (viewport.offsetHeight / 2) - (metrics.cardSize / 2);
-      track.style.transform = `translateY(${offset}px)`;
-    }
-
-    if (animate) {
-      setTimeout(highlightCenterCard, 100);
-    } else {
-      highlightCenterCard();
-    }
-  }
-
-  track.addEventListener('transitionend', () => {
-    isTransitioning = false;
-    if (currentIndex >= originalCount * 2) {
-      currentIndex = originalCount;
-      move(false);
-    } else if (currentIndex < originalCount) {
-      currentIndex = originalCount * 2 - 1;
-      move(false);
-    }
-  });
-
-  function startAutoCycle() {
-    setInterval(() => {
-      if (isTransitioning) return;
-      isTransitioning = true;
-      currentIndex++;
-      move(true);
-    }, 3000);
-  }
-
-  window.addEventListener('resize', () => move(false));
-
-  setTimeout(() => {
-    move(false);
-    startAutoCycle();
-  }, 200);
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   injectProducts();
   startFomoCounter();
-  initReviewsCarousel();
 });
 </script>
