@@ -1114,10 +1114,9 @@ let currentActiveView = 'home';
 let currentActiveFilter = 'todos';
 let currentActiveBrand = 'todas';
 
-// BASE DE DATOS ACTUALIZADA CON TODAS TUS MARCAS
+// BASE DE DATOS DE PRODUCTOS (CON TU IMAGEN Y PRODUCTO AÑADIDO)
 const productsData = {
   ropa: [
-    // CAMISETAS (Nike, Adidas, Lacoste, Guess, Dolce Gabbana, Off White, Moncler, Versace, Balenciaga, Stussy, Essentials, Ellesse, Icon, Moschino, Calvin Klein, Dior, Boss, Prada, Jordan, Givenchy, Dsquared, Gucci, Fendi, Chanel, Kenzo)
     { name: "Graphic Tech Tee", subcategory: "Camisetas", brand: "Nike", desc: "Camiseta de corte pesado con estampado urbano.", price: "35.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
     { name: "Classic Trefoil Tee", subcategory: "Camisetas", brand: "Adidas", desc: "Camiseta clásica de algodón orgánico.", price: "32.00€", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=400&auto=format&fit=crop" },
     { name: "Pique Croco Polo", subcategory: "Camisetas", brand: "Lacoste", desc: "Polo clásico en tejido de algodón pique.", price: "85.00€", img: "https://images.unsplash.com/photo-1625910513413-3fc215c89882?q=80&w=400&auto=format&fit=crop" },
@@ -1143,8 +1142,6 @@ const productsData = {
     { name: "FF Karligraphy Tee", subcategory: "Camisetas", brand: "Fendi", desc: "Detalles monograma bordados en el pecho.", price: "360.00€", img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=400&auto=format&fit=crop" },
     { name: "Paris Minimal Tee", subcategory: "Camisetas", brand: "Chanel", desc: "Edición limitada en jersey de seda y algodón.", price: "480.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
     { name: "Tiger Head Crest Tee", subcategory: "Camisetas", brand: "Kenzo", desc: "El famoso bordado de cabeza de tigre urbano.", price: "125.00€", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=400&auto=format&fit=crop" },
-
-    // CONJUNTOS (Jordan, The North Face, Nike, Fila, Adidas, Balenciaga, Calvin Klein, Ellesse, Kenzo, Trapstar)
     { name: "Flight Essential Set", subcategory: "Conjuntos", brand: "Jordan", desc: "Conjunto de sudadera y chándal capuchonado.", price: "110.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
     { name: "Summit Fleece Tracksuit", subcategory: "Conjuntos", brand: "The North Face", desc: "Conjunto térmico ultrarresistente para exteriores.", price: "145.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
     { name: "Tech Fleece Complete Set", subcategory: "Conjuntos", brand: "Nike", desc: "El conjunto urbano por excelencia en tejido polar.", price: "130.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
@@ -1155,16 +1152,14 @@ const productsData = {
     { name: "Heritage Sport Set", subcategory: "Conjuntos", brand: "Ellesse", desc: "Estilo retro italiano en suave poliéster.", price: "80.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
     { name: "Tiger Crest Tracksuit", subcategory: "Conjuntos", brand: "Kenzo", desc: "Bordados de calidad superior en pecho y pierna.", price: "340.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
     { name: "Shooters Hyperdrive Set", subcategory: "Conjuntos", brand: "Trapstar", desc: "Conjunto exclusivo edición limitada UK Drill.", price: "180.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
-
-    // ABRIGOS (Nike, Ralph Lauren, Moncler, The North Face)
     { name: "Down Puffer Jacket", subcategory: "Abrigos", brand: "Nike", desc: "Plumas con aislamiento sintético de alto rendimiento.", price: "120.00€", img: "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=400&auto=format&fit=crop" },
     { name: "Pony Puffer Coat", subcategory: "Abrigos", brand: "Ralph Lauren", desc: "Chaqueta acolchada en pluma natural con bordado.", price: "280.00€", img: "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=400&auto=format&fit=crop" },
     { name: "Maya Glossy Jacket", subcategory: "Abrigos", brand: "Moncler", desc: "Plumas técnico con acabado brillante icónico.", price: "980.00€", img: "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=400&auto=format&fit=crop" },
     { name: "Nuptse 1996 Retro", subcategory: "Abrigos", brand: "The North Face", desc: "El plumas atemporal con relleno de 700 cuins.", price: "300.00€", img: "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=400&auto=format&fit=crop" }
   ],
   calzado: [
-    // ZAPATILLAS (Nike, New Balance, Adidas, Jordan, Converse, Alexander McQueen, Louis Vuitton, Lacoste, Hermes, Dior)
-    { name: "Air Force 1 Low", subcategory: "Zapatillas", brand: "Nike", desc: "Icono clásico en piel blanca pura.", price: "110.00€", img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=400&auto=format&fit=crop" },
+    // TU PRODUCTO CON FOTO LOCAL AÑADIDO AL PRINCIPIO
+    { name: "Air Force 1 Low", subcategory: "Zapatillas", brand: "Nike", desc: "Zapatillas icónicas de piel en color blanco.", price: "50.00€", img: "img/nike-af1.jpg" },
     { name: "NB 550 Retro", subcategory: "Zapatillas", brand: "New Balance", desc: "Diseño vintage retro de baloncesto urbano.", price: "130.00€", img: "https://images.unsplash.com/photo-1539185441755-769473a23570?q=80&w=400&auto=format&fit=crop" },
     { name: "Forum Low Classic", subcategory: "Zapatillas", brand: "Adidas", desc: "Zapatillas con correa de tobillo en piel.", price: "100.00€", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=400&auto=format&fit=crop" },
     { name: "Air Jordan 1 High OG", subcategory: "Zapatillas", brand: "Jordan", desc: "La zapatilla legendaria de corte alto.", price: "180.00€", img: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?q=80&w=400&auto=format&fit=crop" },
@@ -1174,8 +1169,6 @@ const productsData = {
     { name: "Carnaby Evo Sneaker", subcategory: "Zapatillas", brand: "Lacoste", desc: "Diseño de tenis refinado con cocodrilo lateral.", price: "95.00€", img: "https://images.unsplash.com/photo-1539185441755-769473a23570?q=80&w=400&auto=format&fit=crop" },
     { name: "Bouncing Trainer", subcategory: "Zapatillas", brand: "Hermes", desc: "Suela ultra ligera en malla y cuero suave.", price: "780.00€", img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=400&auto=format&fit=crop" },
     { name: "B23 High-Top", subcategory: "Zapatillas", brand: "Dior", desc: "Lona transparente con estampado Dior Oblique.", price: "850.00€", img: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?q=80&w=400&auto=format&fit=crop" },
-
-    // CHANCLAS (Nike)
     { name: "Offcourt Slide", subcategory: "Chanclas", brand: "Nike", desc: "Pala acolchada ultrasuave con espuma Revive.", price: "35.00€", img: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=400&auto=format&fit=crop" }
   ],
   accesorios: [
