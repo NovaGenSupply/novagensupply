@@ -1,5 +1,10 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovaGen Supply</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
 /* Variables de Identidad */
 :root {
@@ -82,7 +87,6 @@ body {
   align-items: center;
 }
 
-/* Elementos de Navegación y Dropdowns */
 .nav-item-container {
   position: relative;
   display: inline-block;
@@ -163,7 +167,7 @@ body {
   display: block !important;
 }
 
-/* Buscador Cyberpunk Animado */
+/* Buscador */
 .search-container {
   position: relative;
   display: flex;
@@ -216,7 +220,6 @@ body {
   box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
 }
 
-/* Globo indicador del carrito */
 .cart-link {
   position: relative;
 }
@@ -239,7 +242,7 @@ body {
   box-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
 }
 
-/* Contenedor de Filtros Internos (Subcategorías) */
+/* Filtros Internos y Marcas */
 .filter-row {
   display: flex;
   justify-content: center;
@@ -251,7 +254,6 @@ body {
   margin-right: auto;
 }
 
-/* Carrusel Horizontal Deslizante para Marcas */
 .brand-filter-row {
   display: flex;
   flex-wrap: nowrap;
@@ -296,7 +298,6 @@ body {
   background-color: rgba(0, 229, 255, 0.05);
 }
 
-/* Chips del carrusel de Marcas */
 .btn-brand-filter {
   flex-shrink: 0;
   background-color: var(--bg-card);
@@ -741,6 +742,160 @@ body {
   line-height: 1.6;
 }
 
+/* MODAL DE PRODUCTO */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background-color: var(--bg-card);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.15);
+  border-radius: 8px;
+  max-width: 850px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  padding: 30px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: var(--accent-blue);
+}
+
+.modal-img-wrapper {
+  background-color: #050505;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 320px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.modal-img-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.modal-social-proof {
+  background-color: rgba(0, 229, 255, 0.08);
+  border: 1px solid var(--accent-blue);
+  color: var(--accent-blue);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin: 12px 0;
+  display: inline-block;
+}
+
+.size-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.size-selector {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.size-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-main);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.size-btn:hover, .size-btn.selected {
+  border-color: var(--accent-blue);
+  background-color: var(--accent-blue);
+  color: #000;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+}
+
+.phone-input-group {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.phone-input-group:focus-within {
+  border-color: var(--accent-blue);
+}
+
+.phone-prefix {
+  background-color: rgba(0, 229, 255, 0.15);
+  color: var(--accent-blue);
+  font-weight: bold;
+  padding: 12px 14px;
+  font-size: 14px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  user-select: none;
+}
+
+.phone-input-group input {
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  outline: none;
+}
+
 /* Footer */
 .main-footer {
   background-color: #000;
@@ -787,43 +942,35 @@ body {
   transform: translateY(-2px);
 }
 
-/* Media Queries Adaptativas */
 @media (max-width: 768px) {
   .main-header {
     flex-direction: column;
     gap: 15px;
     padding: 15px 20px;
   }
-  
   .nav-links {
     width: 100%;
     justify-content: center;
     flex-wrap: wrap;
     gap: 5px;
   }
-  
   .nav-item-container {
     position: static;
   }
-
   .nav-links a .nav-text {
     display: none;
   }
-  
   .nav-links a i.nav-icon {
     display: inline-block;
   }
-
   .nav-links a {
     margin-left: 8px;
     margin-right: 8px;
     font-size: 20px;
   }
-  
   .nav-links a:hover {
     transform: scale(1.1);
   }
-
   .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -836,25 +983,20 @@ body {
     border-radius: 0;
     text-align: center;
   }
-
   .dropdown-menu li a {
     text-align: center;
     font-size: 14px;
     padding: 12px 20px;
   }
-
   .search-container {
     margin-left: 10px;
   }
-  
   .search-box-wrapper.open {
     max-width: 130px;
   }
-  
   .search-input {
     width: 110px;
   }
-
   .hero { padding: 60px 15px; }
   .hero h1 { font-size: 32px; letter-spacing: 2px; }
   .hero p { font-size: 14px; margin-bottom: 25px; padding: 0 10px; }
@@ -866,31 +1008,32 @@ body {
   .fomo-text { font-size: 11px; text-align: center; }
 }
 </style>
+</head>
+<body>
 
 <!-- Barra de Anuncios Infinita -->
 <div class="announcement-ticker">
   <div class="ticker-wrap">
-    <div class="ticker-item">🚚 ENVÍO GRATUITO EN PEDIDOS SUPERIORES A 50€</div>
-    <div class="ticker-item">🔥 EDICIONES EXCLUSIVAS BAJO DEMANDA</div>
-    <div class="ticker-item">💬 SOPORTE OFICIAL DISPONIBLE EN REDES</div>
-    <div class="ticker-item">🚚 ENVÍO GRATUITO EN PEDIDOS SUPERIORES A 50€</div>
-    <div class="ticker-item">🔥 EDICIONES EXCLUSIVAS BAJO DEMANDA</div>
-    <div class="ticker-item">💬 SOPORTE OFICIAL DISPONIBLE EN REDES</div>
+    <div class="ticker-item">ENVÍO GRATUITO EN PEDIDOS SUPERIORES A 50€</div>
+    <div class="ticker-item">EDICIONES EXCLUSIVAS BAJO DEMANDA</div>
+    <div class="ticker-item">SOPORTE OFICIAL DISPONIBLE EN REDES</div>
+    <div class="ticker-item">ENVÍO GRATUITO EN PEDIDOS SUPERIORES A 50€</div>
+    <div class="ticker-item">EDICIONES EXCLUSIVAS BAJO DEMANDA</div>
+    <div class="ticker-item">SOPORTE OFICIAL DISPONIBLE EN REDES</div>
   </div>
   <div class="ticker-wrap" aria-hidden="true">
-    <div class="ticker-item">🚚 ENVÍO GRATUITO EN PEDIDOS SUPERIORES A 50€</div>
-    <div class="ticker-item">🔥 EDICIONES EXCLUSIVAS BAJO DEMANDA</div>
-    <div class="ticker-item">💬 SOPORTE OFICIAL DISPONIBLE EN REDES</div>
-    <div class="ticker-item">🚚 ENVÍO GRATUITO EN PEDIDOS SUPERIORES A 50€</div>
-    <div class="ticker-item">🔥 EDICIONES EXCLUSIVAS BAJO DEMANDA</div>
-    <div class="ticker-item">💬 SOPORTE OFICIAL DISPONIBLE EN REDES</div>
+    <div class="ticker-item">ENVÍO GRATUITO EN PEDIDOS SUPERIORES A 50€</div>
+    <div class="ticker-item">EDICIONES EXCLUSIVAS BAJO DEMANDA</div>
+    <div class="ticker-item">SOPORTE OFICIAL DISPONIBLE EN REDES</div>
+    <div class="ticker-item">ENVÍO GRATUITO EN PEDIDOS SUPERIORES A 50€</div>
+    <div class="ticker-item">EDICIONES EXCLUSIVAS BAJO DEMANDA</div>
+    <div class="ticker-item">SOPORTE OFICIAL DISPONIBLE EN REDES</div>
   </div>
 </div>
 
 <header class="main-header">
   <div class="logo" onclick="showSection('home')">NovaGen Supply</div>
   <nav class="nav-links">
-    
     <!-- Ropa con Dropdown -->
     <div class="nav-item-container">
       <a href="#" onclick="handleNavClick(event, 'ropa')" title="Ropa">
@@ -902,7 +1045,6 @@ body {
         <li><a href="#" onclick="handleDropdownFilter(event, 'ropa', 'Abrigos')">Abrigos</a></li>
       </ul>
     </div>
-
     <!-- Calzado con Dropdown -->
     <div class="nav-item-container">
       <a href="#" onclick="handleNavClick(event, 'calzado')" title="Calzado">
@@ -913,7 +1055,6 @@ body {
         <li><a href="#" onclick="handleDropdownFilter(event, 'calzado', 'Chanclas')">Chanclas</a></li>
       </ul>
     </div>
-
     <!-- Accesorios con Dropdown -->
     <div class="nav-item-container">
       <a href="#" onclick="handleNavClick(event, 'accesorios')" title="Accesorios">
@@ -928,13 +1069,11 @@ body {
         <li><a href="#" onclick="handleDropdownFilter(event, 'accesorios', 'gafas de sol')">Gafas de Sol</a></li>
       </ul>
     </div>
-
     <div class="nav-item-container">
       <a href="#" onclick="showSection('contacto')" title="Contacto">
         <i class="fa-solid fa-envelope nav-icon"></i><span class="nav-text">Contacto</span>
       </a>
     </div>
-
     <!-- Buscador Integrado -->
     <div class="search-container">
       <button class="search-icon-btn" onclick="toggleSearchBox()" title="Buscar productos">
@@ -944,7 +1083,6 @@ body {
         <input type="text" class="search-input" id="search-input" placeholder="Buscar en esta sección..." oninput="handleSearchQuery(this.value)">
       </div>
     </div>
-
     <a href="#" class="cart-link" onclick="showSection('carrito')" title="Carrito de Compras">
       <i class="fa-solid fa-shopping-cart"></i>
       <span class="cart-badge">0</span>
@@ -958,7 +1096,6 @@ body {
       <h1>PROPULSA TU ESTILO</h1>
       <p>Prendas, calzado y accesorios exclusivos seleccionados para tu día a día.</p>
       <button class="btn-primary" onclick="scrollToCollections()">Explorar catálogo</button>
-      
       <div class="fomo-counter">
         <div class="live-dot-container">
           <div class="live-dot"></div>
@@ -967,7 +1104,6 @@ body {
         <div class="fomo-text"><span id="active-users">--</span> personas están explorando la tienda en este momento.</div>
       </div>
     </div>
-
     <div id="collections-section" class="collections-container">
       <div class="row-top">
         <div class="collection-card" onclick="showSection('ropa')">
@@ -1045,7 +1181,6 @@ body {
         </div>
         <button type="submit" id="contact-submit-btn" class="btn-primary">Enviar Mensaje</button>
       </form>
-
       <div id="form-success" class="form-success-card">
         <i class="fa-solid fa-circle-check"></i>
         <h3>¡Mensaje Recibido!</h3>
@@ -1071,7 +1206,7 @@ body {
       </div>
       <div class="faq-item">
         <h3>¿Cómo puedo realizar una devolución o cambio de talla?</h3>
-        <p>Dispones de 14 días naturales desde que recibes tu paquete para solicitar un cambio o devolución. El producto debe estar sin usar y conservar sus etiquetas. Para gestionarlo, escríbenos directamente a cualquiera de nuestras redes sociales oficiales o métodos de contacto habilitados en la web y te guíaremos en el proceso.</p>
+        <p>Dispones de 14 días naturales desde que recibes tu paquete para solicitar un cambio o devolución. El producto debe estar sin usar y conservar sus etiquetas. Para gestionarlo, escríbenos directamente a cualquiera de nuestras redes sociales oficiales o métodos de contacto habilitados en la web y te guiaremos en el proceso.</p>
       </div>
       <div class="faq-item">
         <h3>¿Cómo sé cuál es mi talla correcta?</h3>
@@ -1093,6 +1228,66 @@ body {
   </section>
 </main>
 
+<!-- MODAL FICHA DE PRODUCTO CON FORMULARIO INTEGRADO -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeProductModal()">&times;</button>
+    <div class="modal-img-wrapper">
+      <img id="modalImg" src="" alt="Producto">
+    </div>
+    <div>
+      <h2 id="modalTitle" style="font-size: 22px; text-transform: uppercase; letter-spacing: 1px;"></h2>
+      <div id="modalPrice" class="product-price" style="margin: 8px 0; font-size: 22px;"></div>
+      <p id="modalDesc" style="color: var(--text-muted); font-size: 13px; line-height: 1.5;"></p>
+      
+      <!-- Contador de Ventas Recientes -->
+      <div class="modal-social-proof">
+        <span id="salesCount">14</span> unidades vendidas en las últimas horas
+      </div>
+
+      <!-- Selector de Tallas -->
+      <div class="size-title">Selecciona tu talla:</div>
+      <div class="size-selector">
+        <button class="size-btn" onclick="selectSize(this)">39</button>
+        <button class="size-btn" onclick="selectSize(this)">40</button>
+        <button class="size-btn" onclick="selectSize(this)">41</button>
+        <button class="size-btn" onclick="selectSize(this)">42</button>
+        <button class="size-btn" onclick="selectSize(this)">43</button>
+        <button class="size-btn" onclick="selectSize(this)">44</button>
+      </div>
+
+      <!-- Formulario de Compra Directa -->
+      <form id="product-order-form" action="https://formspree.io/f/xgavvwyg" method="POST" onsubmit="handleProductOrder(event)" style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+        <input type="hidden" id="selectedSizeInput" name="talla" value="">
+        <input type="hidden" id="selectedProductInput" name="producto" value="">
+        <div class="form-group" style="margin-bottom: 0;">
+          <input type="text" name="name" required placeholder="Tu Nombre">
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <input type="email" name="email" required placeholder="ejemplo@correo.com">
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <div class="phone-input-group">
+            <span class="phone-prefix">+34</span>
+            <input type="tel" name="phone" placeholder="123 456 789" pattern="[0-9]{9,11}" required>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <textarea name="address" rows="2" placeholder="Dirección de envío" required></textarea>
+        </div>
+        <button type="submit" id="order-submit-btn" class="btn-primary" style="width: 100%; margin-top: 5px;">Realizar Pedido</button>
+      </form>
+
+      <div id="order-success" class="form-success-card">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3>¡Gracias por tu compra!</h3>
+        <p>Hemos recibido tu pedido correctamente. En breve te enviaremos un correo electrónico con los detalles del envío y tu número de seguimiento.</p>
+        <button class="btn-primary" onclick="resetOrderModal()">Realizar otra compra</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer class="main-footer">
   <div class="footer-links">
     <a href="#" onclick="showSection('faq')">Preguntas Frecuentes</a>
@@ -1102,7 +1297,7 @@ body {
   <div class="footer-socials">
     <a href="https://wa.me/yourphonenumber" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
     <a href="https://www.instagram.com/novagen.supply" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.tiktok.com/@novagen.supply" target="_blank" rel="noopener" title="TikTok"><i class="fab fa-tiktok"></i></a>
+    <a href="https://www.tiktok.com/@novagen.supply" target="_blank" rel="noopener" title="Tik Tok"><i class="fab fa-tiktok"></i></a>
     <a href="https://www.facebook.com" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook"></i></a>
     <a href="https://www.youtube.com" target="_blank" rel="noopener" title="YouTube"><i class="fab fa-youtube"></i></a>
     <a href="https://www.pinterest.com" target="_blank" rel="noopener" title="Pinterest"><i class="fab fa-pinterest"></i></a>
@@ -1113,23 +1308,24 @@ body {
 let currentActiveView = 'home';
 let currentActiveFilter = 'todos';
 let currentActiveBrand = 'todas';
+let currentSales = 14;
 
-// BASE DE DATOS DE PRODUCTOS (CON TU IMAGEN Y PRODUCTO AÑADIDO)
+// BASE DE DATOS DE PRODUCTOS
 const productsData = {
   ropa: [
     { name: "Graphic Tech Tee", subcategory: "Camisetas", brand: "Nike", desc: "Camiseta de corte pesado con estampado urbano.", price: "35.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
     { name: "Classic Trefoil Tee", subcategory: "Camisetas", brand: "Adidas", desc: "Camiseta clásica de algodón orgánico.", price: "32.00€", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=400&auto=format&fit=crop" },
     { name: "Pique Croco Polo", subcategory: "Camisetas", brand: "Lacoste", desc: "Polo clásico en tejido de algodón pique.", price: "85.00€", img: "https://images.unsplash.com/photo-1625910513413-3fc215c89882?q=80&w=400&auto=format&fit=crop" },
-    { name: "Triangle Logo Tee", subcategory: "Camisetas", brand: "Guess", desc: "Camiseta entallada con el icónico logo frontal.", price: "40.00€", img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=400&auto=format&fit=crop" },
+    { name: "Triangle Logo Tee", subcategory: "Camisetas", brand: "Guess", desc: "Camiseta entallada con el icónico logo frontal.", price: "40.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
     { name: "Luxury Crest Tee", subcategory: "Camisetas", brand: "Dolce Gabbana", desc: "Camiseta de corte italiano con detalles bordados.", price: "220.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
     { name: "Arrow Box Tee", subcategory: "Camisetas", brand: "Off White", desc: "Estampado oversized en espalda con ajuste streetwear.", price: "260.00€", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=400&auto=format&fit=crop" },
-    { name: "Felt Badge Tee", subcategory: "Camisetas", brand: "Moncler", desc: "Camiseta de algodón suave con parche de fieltro.", price: "190.00€", img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=400&auto=format&fit=crop" },
+    { name: "Felt Badge Tee", subcategory: "Camisetas", brand: "Moncler", desc: "Camiseta de algodón suave con parche de fieltro.", price: "190.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
     { name: "Medusa Head Tee", subcategory: "Camisetas", brand: "Versace", desc: "Estampado gráfico dorado sobre algodón negro mate.", price: "290.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
     { name: "BB Logo Oversize Tee", subcategory: "Camisetas", brand: "Balenciaga", desc: "Fit ultra holgado de alta costura urbana.", price: "350.00€", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=400&auto=format&fit=crop" },
-    { name: "Stock Crown Tee", subcategory: "Camisetas", brand: "Stussy", desc: "Estampado gráfico skater vintage.", price: "45.00€", img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=400&auto=format&fit=crop" },
+    { name: "Stock Crown Tee", subcategory: "Camisetas", brand: "Stussy", desc: "Estampado gráfico skater vintage.", price: "45.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
     { name: "Fear of God Essentials Tee", subcategory: "Camisetas", brand: "Essentials", desc: "Tono neutro en corte holgado y tejido pesado.", price: "60.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
     { name: "Heritage Striped Tee", subcategory: "Camisetas", brand: "Ellesse", desc: "Camiseta retro estilo sport vintage.", price: "30.00€", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=400&auto=format&fit=crop" },
-    { name: "Icon Statement Tee", subcategory: "Camisetas", brand: "Icon", desc: "Detalle tipográfico bordado frontal.", price: "110.00€", img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=400&auto=format&fit=crop" },
+    { name: "Icon Statement Tee", subcategory: "Camisetas", brand: "Icon", desc: "Detalle tipográfico bordado frontal.", price: "110.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
     { name: "Toy Bear Tee", subcategory: "Camisetas", brand: "Moschino", desc: "Diseño icónico con oso impreso.", price: "180.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
     { name: "Monogram Monochromatic Tee", subcategory: "Camisetas", brand: "Calvin Klein", desc: "Estilo minimalista en algodón elástico.", price: "40.00€", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=400&auto=format&fit=crop" },
     { name: "Atelier Embroidery Tee", subcategory: "Camisetas", brand: "Dior", desc: "Algodón de galga fina con bordado sutil.", price: "420.00€", img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=400&auto=format&fit=crop" },
@@ -1139,37 +1335,35 @@ const productsData = {
     { name: "Refracted Signature Tee", subcategory: "Camisetas", brand: "Givenchy", desc: "Diseño contemporáneo en tonos oscuros.", price: "310.00€", img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=400&auto=format&fit=crop" },
     { name: "Caten Twin Tee", subcategory: "Camisetas", brand: "Dsquared", desc: "Estilo desgastado de confección italiana.", price: "175.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
     { name: "GG Blade Tee", subcategory: "Camisetas", brand: "Gucci", desc: "Estampado clásico Gucci Blade vintage.", price: "390.00€", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=400&auto=format&fit=crop" },
-    { name: "FF Karligraphy Tee", subcategory: "Camisetas", brand: "Fendi", desc: "Detalles monograma bordados en el pecho.", price: "360.00€", img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=400&auto=format&fit=crop" },
+    { name: "FF Karligraphy Tee", subcategory: "Camisetas", brand: "Fendi", desc: "Detalles monograma bordados en el pecho.", price: "360.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
     { name: "Paris Minimal Tee", subcategory: "Camisetas", brand: "Chanel", desc: "Edición limitada en jersey de seda y algodón.", price: "480.00€", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" },
     { name: "Tiger Head Crest Tee", subcategory: "Camisetas", brand: "Kenzo", desc: "El famoso bordado de cabeza de tigre urbano.", price: "125.00€", img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=400&auto=format&fit=crop" },
-    { name: "Flight Essential Set", subcategory: "Conjuntos", brand: "Jordan", desc: "Conjunto de sudadera y chándal capuchonado.", price: "110.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
-    { name: "Summit Fleece Tracksuit", subcategory: "Conjuntos", brand: "The North Face", desc: "Conjunto térmico ultrarresistente para exteriores.", price: "145.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
-    { name: "Tech Fleece Complete Set", subcategory: "Conjuntos", brand: "Nike", desc: "El conjunto urbano por excelencia en tejido polar.", price: "130.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
-    { name: "Retro Block Set", subcategory: "Conjuntos", brand: "Fila", desc: "Diseño multicolor con bloques vintage.", price: "85.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
-    { name: "Three Stripes Tracksuit", subcategory: "Conjuntos", brand: "Adidas", desc: "Chándal clásico deportivo con las 3 bandas.", price: "95.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
-    { name: "Luxury Track Set", subcategory: "Conjuntos", brand: "Balenciaga", desc: "Corte oversized en poliéster reciclado de lujo.", price: "890.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
-    { name: "Modern Lounge Set", subcategory: "Conjuntos", brand: "Calvin Klein", desc: "Comodidad suprema en tonos neutros.", price: "90.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
-    { name: "Heritage Sport Set", subcategory: "Conjuntos", brand: "Ellesse", desc: "Estilo retro italiano en suave poliéster.", price: "80.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
-    { name: "Tiger Crest Tracksuit", subcategory: "Conjuntos", brand: "Kenzo", desc: "Bordados de calidad superior en pecho y pierna.", price: "340.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
-    { name: "Shooters Hyperdrive Set", subcategory: "Conjuntos", brand: "Trapstar", desc: "Conjunto exclusivo edición limitada UK Drill.", price: "180.00€", img: "https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=400&auto=format&fit=crop" },
+    { name: "Flight Essential Set", subcategory: "Conjuntos", brand: "Jordan", desc: "Conjunto de sudadera y chándal capuchonado.", price: "110.00€", img: "https://images.unsplash.com/photo-1517423568366-8683523034fd?q=80&w=400&auto=format&fit=crop" },
+    { name: "Summit Fleece Tracksuit", subcategory: "Conjuntos", brand: "The North Face", desc: "Conjunto térmico ultrarresistente para exteriores.", price: "145.00€", img: "https://images.unsplash.com/photo-1517423568366-8683523034fd?q=80&w=400&auto=format&fit=crop" },
+    { name: "Tech Fleece Complete Set", subcategory: "Conjuntos", brand: "Nike", desc: "El conjunto urbano por excelencia en tejido polar.", price: "130.00€", img: "https://images.unsplash.com/photo-1517423568366-8683523034fd?q=80&w=400&auto=format&fit=crop" },
+    { name: "Retro Block Set", subcategory: "Conjuntos", brand: "Fila", desc: "Diseño multicolor con bloques vintage.", price: "85.00€", img: "https://images.unsplash.com/photo-1517423568366-8683523034fd?q=80&w=400&auto=format&fit=crop" },
+    { name: "Three Stripes Tracksuit", subcategory: "Conjuntos", brand: "Adidas", desc: "Chándal clásico deportivo con las 3 bandas.", price: "95.00€", img: "https://images.unsplash.com/photo-1517423568366-8683523034fd?q=80&w=400&auto=format&fit=crop" },
+    { name: "Luxury Track Set", subcategory: "Conjuntos", brand: "Balenciaga", desc: "Corte oversized en poliéster reciclado de lujo.", price: "890.00€", img: "https://images.unsplash.com/photo-1517423568366-8683523034fd?q=80&w=400&auto=format&fit=crop" },
+    { name: "Modern Lounge Set", subcategory: "Conjuntos", brand: "Calvin Klein", desc: "Comodidad suprema en tonos neutros.", price: "90.00€", img: "https://images.unsplash.com/photo-1517423568366-8683523034fd?q=80&w=400&auto=format&fit=crop" },
+    { name: "Heritage Sport Set", subcategory: "Conjuntos", brand: "Ellesse", desc: "Estilo retro italiano en suave poliéster.", price: "80.00€", img: "https://images.unsplash.com/photo-1517423568366-8683523034fd?q=80&w=400&auto=format&fit=crop" },
+    { name: "Tiger Crest Tracksuit", subcategory: "Conjuntos", brand: "Kenzo", desc: "Bordados de calidad superior en pecho y pierna.", price: "340.00€", img: "https://images.unsplash.com/photo-1517423568366-8683523034fd?q=80&w=400&auto=format&fit=crop" },
+    { name: "Shooters Hyperdrive Set", subcategory: "Conjuntos", brand: "Trapstar", desc: "Conjunto exclusivo edición limitada UK Drill.", price: "180.00€", img: "https://images.unsplash.com/photo-1517423568366-8683523034fd?q=80&w=400&auto=format&fit=crop" },
     { name: "Down Puffer Jacket", subcategory: "Abrigos", brand: "Nike", desc: "Plumas con aislamiento sintético de alto rendimiento.", price: "120.00€", img: "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=400&auto=format&fit=crop" },
     { name: "Pony Puffer Coat", subcategory: "Abrigos", brand: "Ralph Lauren", desc: "Chaqueta acolchada en pluma natural con bordado.", price: "280.00€", img: "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=400&auto=format&fit=crop" },
     { name: "Maya Glossy Jacket", subcategory: "Abrigos", brand: "Moncler", desc: "Plumas técnico con acabado brillante icónico.", price: "980.00€", img: "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=400&auto=format&fit=crop" },
     { name: "Nuptse 1996 Retro", subcategory: "Abrigos", brand: "The North Face", desc: "El plumas atemporal con relleno de 700 cuins.", price: "300.00€", img: "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=400&auto=format&fit=crop" }
   ],
   calzado: [
-    // TU PRODUCTO CON FOTO LOCAL AÑADIDO AL PRINCIPIO
-    { name: "Air Force 1 Low", subcategory: "Zapatillas", brand: "Nike", desc: "Zapatillas icónicas de piel en color blanco.", price: "50.00€", img: "./img/nike-af1.jpg" },
+    { name: "Air Force 1 Low", subcategory: "Zapatillas", brand: "Nike", desc: "Zapatillas icónicas de piel en color blanco.", price: "50.00€", img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=400&auto=format&fit=crop" },
     { name: "NB 550 Retro", subcategory: "Zapatillas", brand: "New Balance", desc: "Diseño vintage retro de baloncesto urbano.", price: "130.00€", img: "https://images.unsplash.com/photo-1539185441755-769473a23570?q=80&w=400&auto=format&fit=crop" },
     { name: "Forum Low Classic", subcategory: "Zapatillas", brand: "Adidas", desc: "Zapatillas con correa de tobillo en piel.", price: "100.00€", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=400&auto=format&fit=crop" },
     { name: "Air Jordan 1 High OG", subcategory: "Zapatillas", brand: "Jordan", desc: "La zapatilla legendaria de corte alto.", price: "180.00€", img: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?q=80&w=400&auto=format&fit=crop" },
     { name: "Chuck 70 Vintage", subcategory: "Zapatillas", brand: "Converse", desc: "Lona reforzada con suela de goma vintage.", price: "85.00€", img: "https://images.unsplash.com/photo-1607522370275-f14206abe5d3?q=80&w=400&auto=format&fit=crop" },
-    { name: "Oversized Sole Sneaker", subcategory: "Zapatillas", brand: "Alexander McQueen", desc: "Piel de becerro con plataforma icónica.", price: "450.00€", img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=400&auto=format&fit=crop" },
+    { name: "Oversized Sole Sneaker", subcategory: "Zapatillas", brand: "Alexander McQueen", desc: "Piel de becerro con plataforma icónica.", price: "450.00€", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=400&auto=format&fit=crop" },
     { name: "LV Trainer Sneaker", subcategory: "Zapatillas", brand: "Louis Vuitton", desc: "Piel grabada con patrón Monogram de lujo.", price: "920.00€", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=400&auto=format&fit=crop" },
     { name: "Carnaby Evo Sneaker", subcategory: "Zapatillas", brand: "Lacoste", desc: "Diseño de tenis refinado con cocodrilo lateral.", price: "95.00€", img: "https://images.unsplash.com/photo-1539185441755-769473a23570?q=80&w=400&auto=format&fit=crop" },
-    { name: "Bouncing Trainer", subcategory: "Zapatillas", brand: "Hermes", desc: "Suela ultra ligera en malla y cuero suave.", price: "780.00€", img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=400&auto=format&fit=crop" },
-    { name: "B23 High-Top", subcategory: "Zapatillas", brand: "Dior", desc: "Lona transparente con estampado Dior Oblique.", price: "850.00€", img: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?q=80&w=400&auto=format&fit=crop" },
-    { name: "Offcourt Slide", subcategory: "Chanclas", brand: "Nike", desc: "Pala acolchada ultrasuave con espuma Revive.", price: "35.00€", img: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=400&auto=format&fit=crop" }
+    { name: "B23 High-Top", subcategory: "Zapatillas", brand: "Dior", desc: "Lona transparente con estampado Dior Oblique.", price: "850.00€", img: "https://images.unsplash.com/photo-1607522370275-f14206abe5d3?q=80&w=400&auto=format&fit=crop" },
+    { name: "Offcourt Slide", subcategory: "Chanclas", brand: "Nike", desc: "Pala acolchada ultrasuave con espuma Revive.", price: "35.00€", img: "https://images.unsplash.com/photo-1539185441755-769473a23570?q=80&w=400&auto=format&fit=crop" }
   ],
   accesorios: [
     { name: "Chrono Cyber Watch", subcategory: "Relojes", brand: "Casio", desc: "Reloj digital mate con pantalla azul eléctrica.", price: "110.00€", img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=400&auto=format&fit=crop" },
@@ -1188,16 +1382,16 @@ const subcategoriesMap = {
 
 function injectProducts() {
   const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
-
+  
   for (const category in productsData) {
     const grid = document.getElementById(`grid-${category}`);
     if (!grid) continue;
+    
     grid.innerHTML = '';
-    
     grid.classList.remove('fade-in');
-    void grid.offsetWidth; 
+    void grid.offsetWidth;
     grid.classList.add('fade-in');
-    
+
     let filteredList = productsData[category];
 
     if (currentActiveView === category && currentActiveFilter !== 'todos') {
@@ -1217,13 +1411,19 @@ function injectProducts() {
     }
 
     if (filteredList.length === 0) {
-      grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px 0;">No se encontraron artículos con los criterios seleccionados.</div>`;
+      grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px 0;">No se encontraron artículos con los criterios seleccionados.</div>';
       continue;
     }
 
     filteredList.forEach(prod => {
       const card = document.createElement('div');
       card.className = 'product-card';
+      
+      const safeName = prod.name.replace(/'/g, "\\'");
+      const safePrice = prod.price.replace(/'/g, "\\'");
+      const safeImg = prod.img.replace(/'/g, "\\'");
+      const safeDesc = prod.desc.replace(/'/g, "\\'");
+
       card.innerHTML = `
         <div class="product-img" style="background-image: url('${prod.img}')"></div>
         <div class="product-info">
@@ -1231,7 +1431,7 @@ function injectProducts() {
           <h4>${prod.name}</h4>
           <p>${prod.desc}</p>
           <div class="product-price">${prod.price}</div>
-          <button class="btn-buy" onclick="alert('Producto añadido al carrito temporal.')">Comprar</button>
+          <button class="btn-buy" onclick="openProductModal('${safeName}', '${safePrice}', '${safeImg}', '${safeDesc}')">Comprar</button>
         </div>
       `;
       grid.appendChild(card);
@@ -1239,10 +1439,10 @@ function injectProducts() {
   }
 }
 
-// Genera la barra deslizante horizontal de marcas dinámicamente según los productos cargados
 function injectBrandFilterRows(category) {
   const brandContainer = document.getElementById(`brands-${category}`);
   if (!brandContainer) return;
+
   brandContainer.innerHTML = '';
 
   let availableProducts = productsData[category] || [];
@@ -1275,6 +1475,7 @@ function injectFilterRows() {
   for (const category in subcategoriesMap) {
     const container = document.getElementById(`filters-${category}`);
     if (!container) continue;
+
     container.innerHTML = '';
 
     const btnAll = document.createElement('button');
@@ -1311,9 +1512,7 @@ function filterBrandInternal(category, brandName) {
 function handleDropdownFilter(e, category, subcategory) {
   e.preventDefault();
   e.stopPropagation();
-  
   document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show-mobile'));
-  
   showSection(category);
   filterCategoryInternal(category, subcategory);
 }
@@ -1322,7 +1521,6 @@ function handleNavClick(e, category) {
   if (window.innerWidth <= 768) {
     e.preventDefault();
     e.stopPropagation();
-    
     const parent = e.target.closest('.nav-item-container');
     const targetMenu = parent.querySelector('.dropdown-menu');
     const wasOpen = targetMenu.classList.contains('show-mobile');
@@ -1339,9 +1537,9 @@ function handleNavClick(e, category) {
 
 function showSection(sectionId) {
   currentActiveView = sectionId;
-  currentActiveFilter = 'todos'; 
+  currentActiveFilter = 'todos';
   currentActiveBrand = 'todas';
-  
+
   const searchInput = document.getElementById('search-input');
   if (searchInput) searchInput.value = '';
 
@@ -1355,8 +1553,9 @@ function showSection(sectionId) {
   if (targetSection) {
     targetSection.classList.add('active');
     setTimeout(() => { targetSection.style.opacity = 1; }, 50);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
   if (['ropa', 'calzado', 'accesorios'].includes(sectionId)) {
     injectFilterRows();
@@ -1372,7 +1571,7 @@ function toggleSearchBox() {
   const wrapper = document.getElementById('search-box-wrapper');
   const btn = document.querySelector('.search-icon-btn');
   const input = document.getElementById('search-input');
-  
+
   if (wrapper.classList.contains('open')) {
     wrapper.classList.remove('open');
     btn.classList.remove('active');
@@ -1388,12 +1587,12 @@ function toggleSearchBox() {
 function handleSearchQuery(value) {
   if (!['ropa', 'calzado', 'accesorios'].includes(currentActiveView)) {
     showSection('ropa');
-    document.getElementById('search-input').value = value;
-    const wrapper = document.getElementById('search-box-wrapper');
-    const btn = document.querySelector('.search-icon-btn');
-    wrapper.classList.add('open');
-    btn.classList.add('active');
   }
+  document.getElementById('search-input').value = value;
+  const wrapper = document.getElementById('search-box-wrapper');
+  const btn = document.querySelector('.search-icon-btn');
+  wrapper.classList.add('open');
+  btn.classList.add('active');
   injectProducts();
 }
 
@@ -1411,7 +1610,7 @@ function startFomoCounter() {
       return Math.floor(Math.random() * (90 - 40 + 1)) + 40;
     } else {
       return Math.random() < 0.5 
-        ? Math.floor(Math.random() * 40) 
+        ? Math.floor(Math.random() * 40)
         : Math.floor(Math.random() * (100 - 91 + 1)) + 91;
     }
   }
@@ -1424,18 +1623,86 @@ function startFomoCounter() {
     const difference = targetUsers - currentUsers;
     const step = difference > 0 ? Math.ceil(difference * 0.4) : Math.floor(difference * 0.4);
     currentUsers += step;
-    
     counterElement.textContent = currentUsers;
   }, 4500);
 }
 
+/* LÓGICA DEL MODAL DE PRODUCTO Y FORMULARIO */
+function openProductModal(title, price, imgSrc, desc) {
+  document.getElementById('modalTitle').innerText = title;
+  document.getElementById('modalPrice').innerText = price;
+  document.getElementById('modalImg').src = imgSrc;
+  document.getElementById('modalDesc').innerText = desc;
+  document.getElementById('selectedProductInput').value = title + ' (' + price + ')';
+  
+  document.getElementById('product-order-form').style.display = 'flex';
+  document.getElementById('order-success').style.display = 'none';
+  document.getElementById('productModal').classList.add('active');
+}
+
+function closeProductModal() {
+  document.getElementById('productModal').classList.remove('active');
+  document.getElementById('selectedSizeInput').value = '';
+  document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
+  document.getElementById('product-order-form').reset();
+}
+
+function selectSize(element) {
+  document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
+  element.classList.add('selected');
+  document.getElementById('selectedSizeInput').value = element.innerText;
+}
+
+async function handleProductOrder(event) {
+  event.preventDefault();
+  const form = event.target;
+  const size = document.getElementById('selectedSizeInput').value;
+
+  if (!size) {
+    alert('Por favor, selecciona tu talla antes de continuar.');
+    return;
+  }
+
+  const btn = document.getElementById('order-submit-btn');
+  const originalBtnText = btn.textContent;
+  btn.textContent = 'Procesando...';
+  btn.disabled = true;
+
+  const data = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      form.style.display = 'none';
+      document.getElementById('order-success').style.display = 'block';
+      form.reset();
+    } else {
+      alert('Ocurrió un error al procesar el pedido. Inténtalo de nuevo.');
+    }
+  } catch (error) {
+    alert('Error de conexión al procesar el pedido.');
+  } finally {
+    btn.textContent = originalBtnText;
+    btn.disabled = false;
+  }
+}
+
+function resetOrderModal() {
+  document.getElementById('order-success').style.display = 'none';
+  document.getElementById('product-order-form').style.display = 'flex';
+  closeProductModal();
+}
+
 async function handleFormSubmission(event) {
   event.preventDefault();
-  
   const form = event.target;
   const btn = document.getElementById('contact-submit-btn');
   const originalBtnText = btn.textContent;
-  
   btn.textContent = 'Enviando...';
   btn.disabled = true;
 
@@ -1445,9 +1712,7 @@ async function handleFormSubmission(event) {
     const response = await fetch(form.action, {
       method: form.method,
       body: data,
-      headers: {
-        'Accept': 'application/json'
-      }
+      headers: { 'Accept': 'application/json' }
     });
 
     if (response.ok) {
@@ -1470,8 +1735,16 @@ function resetContactForm() {
   document.getElementById('contact-form').style.display = 'block';
 }
 
+setInterval(() => {
+  currentSales += 1;
+  const salesEl = document.getElementById('salesCount');
+  if (salesEl) salesEl.innerText = currentSales;
+}, 240000);
+
 document.addEventListener("DOMContentLoaded", () => {
   injectProducts();
   startFomoCounter();
 });
 </script>
+</body>
+</html>
